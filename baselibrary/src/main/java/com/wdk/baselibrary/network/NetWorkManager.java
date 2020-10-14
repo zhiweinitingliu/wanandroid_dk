@@ -2,19 +2,15 @@ package com.wdk.baselibrary.network;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
-import androidx.annotation.MainThread;
-
-import com.google.gson.Gson;
-import com.wdk.baselibrary.data.bean.ServiceDataBean;
-import com.wdk.baselibrary.network.error.ResponseException;
+import com.wdk.baselibrary.data.bean.ResultData;
+import com.wdk.baselibrary.network.error.ResponseCodeException;
 import com.wdk.baselibrary.network.jsonconverter.NetGsonConverterFactory;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
@@ -43,23 +39,20 @@ public class NetWorkManager {
         private static NetWorkManager netWorkManager = new NetWorkManager();
     }
 
-    public <T> void getDataFromServer(Observable<T> observable, RequestData requestData, NetWorkCallBackListener<T> netWorkCallBackListener) {
+    public <T> void getDataFromServer(Observable<ResultData<T>> observable, RequestData<T> requestData) {
         observable.subscribeOn(Schedulers.newThread())
-                .observeOn(Schedulers.io())
-                .onErrorReturn(new Function<Throwable, T>() {
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorReturn(new Function<Throwable, ResultData<T>>() {
                     @Override
-                    public T apply(Throwable throwable) throws Throwable {
-                        if (throwable instanceof ResponseException) {
-                            ResponseException responseException = (ResponseException) throwable;
-                            String errorMessage=responseException.getErrorMsg();
-                            Handler mainThread=new Handler(Looper.getMainLooper());
+                    public ResultData<T> apply(Throwable throwable) throws Throwable {
+                        if (throwable instanceof ResponseCodeException) {
+                            ResponseCodeException responseCodeException = (ResponseCodeException) throwable;
+                            String errorMessage = responseCodeException.getErrorMsg();
+                            Handler mainThread = new Handler(Looper.getMainLooper());
                             mainThread.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    netWorkCallBackListener.onFailed(errorMessage);
-                                    if (requestData.getNetWorkFailedListener() != null) {
-                                        requestData.getNetWorkFailedListener().onFailed(requestData.getWhat(), errorMessage);
-                                    }
+                                    requestData.getNetWorkCallBackImpl().onFailed(new Throwable(errorMessage));
                                 }
                             });
 
@@ -67,7 +60,7 @@ public class NetWorkManager {
                         return null;
                     }
                 })
-                .subscribe(new NetWorkObserver<T>(requestData, netWorkCallBackListener));
+                .subscribe(requestData.getNetWorkObserver());
     }
 
     public Retrofit getRetrofit() {

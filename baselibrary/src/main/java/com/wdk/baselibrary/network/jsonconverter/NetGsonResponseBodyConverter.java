@@ -1,12 +1,15 @@
 package com.wdk.baselibrary.network.jsonconverter;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.wdk.baselibrary.data.bean.ServiceDataBean;
-import com.wdk.baselibrary.network.error.ResponseException;
+import com.wdk.baselibrary.network.error.NullResponseException;
+import com.wdk.baselibrary.network.error.ResponseDataFormatException;
+import com.wdk.baselibrary.network.error.ResponseCodeException;
+import com.wdk.baselibrary.network.error.ResponseDataParseException;
+import com.wdk.baselibrary.utils.JsonUtil;
 
 import org.json.JSONObject;
 
@@ -39,42 +42,28 @@ public class NetGsonResponseBodyConverter<T> implements Converter<ResponseBody, 
     @Override
     public T convert(ResponseBody value) throws IOException {
         String json = value.string();
-        Log.e(TAG, "convert: " + json);
-        JSONObject jsonObject = null;
-        int errorCode = -1;
-        String data = null;
-        String errorMsg = "";
-        try {
-            jsonObject = new JSONObject(json);
-        } catch (Exception e) {
 
+        Log.e(TAG,""+json);
+
+        //服务器返回的json为空
+        if (TextUtils.isEmpty(json)) {
+            throw new NullResponseException().setErrorMsg("服务器返回的json为空");
         }
 
-        if (jsonObject != null) {
-            try {
-                errorCode = jsonObject.getInt("errorCode");
-                errorMsg = jsonObject.getString("errorMsg");
-            } catch (Exception e) {
-                errorCode = -1;
-            }
-            try {
-                data = jsonObject.getString("data");
-            } catch (Exception e) {
-                data = "{}";
-            }
-
+        //服务器返回的json格式不对
+        if (!json.startsWith("{") && !json.startsWith("[")) {
+            throw new ResponseDataFormatException().setErrorMsg("服务器返回的json格式不正确");
         }
 
+        JSONObject jsonObject = JsonUtil.getRootJsonObject(json);
 
-        if (errorCode != 0) {
-            ResponseException responseException = new ResponseException();
-            responseException.setErrorCode(errorCode);
-            responseException.setErrorMsg(errorMsg);
-            throw responseException;
+        //服务器返回的json无法解析
+        if (jsonObject == null) {
+            throw new ResponseDataParseException().setErrorMsg("服务器返回的json无法解析");
         }
 
         try {
-            return adapter.read(gson.newJsonReader(new StringReader(data)));
+            return adapter.read(gson.newJsonReader(new StringReader(json)));
         } finally {
             value.close();
         }

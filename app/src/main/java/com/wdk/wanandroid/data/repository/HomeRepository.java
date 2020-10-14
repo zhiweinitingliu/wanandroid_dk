@@ -1,12 +1,19 @@
 package com.wdk.wanandroid.data.repository;
 
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.wdk.baselibrary.data.bean.ResultData;
+import com.wdk.baselibrary.utils.SharedPreferencesUtil;
 import com.wdk.wanandroid.api.HomeArticleService;
+import com.wdk.wanandroid.constances.Constants;
 import com.wdk.wanandroid.data.bean.ArticleBean;
 import com.wdk.baselibrary.network.NetMutableLiveData;
 import com.wdk.baselibrary.network.NetWorkCallBackListener;
 import com.wdk.baselibrary.network.NetWorkManager;
 import com.wdk.baselibrary.network.RequestData;
 import com.wdk.baselibrary.data.repository.BaseRepository;
+import com.wdk.wanandroid.data.bean.RegisterResponseBean;
 
 import java.util.List;
 
@@ -30,22 +37,11 @@ public class HomeRepository extends BaseRepository {
      * 获取文章列表
      *
      * @param requestData        请求的参数
-     * @param netMutableLiveData 请求的
      */
-    public void getArticleList(RequestData requestData, NetMutableLiveData<List<ArticleBean.ArticleChildBean>> netMutableLiveData) {
+    public void getArticleList(RequestData<ArticleBean> requestData) {
         HomeArticleService service = NetWorkManager.getInstance().create(HomeArticleService.class);
-        Observable<ArticleBean> observable = service.articleList(requestData.getIntParams("page"));
-        NetWorkManager.getInstance().getDataFromServer(observable, requestData, new NetWorkCallBackListener<ArticleBean>() {
-            @Override
-            public void onSuccess(ArticleBean articleBeans) {
-                netMutableLiveData.postValue(articleBeans.getDatas());
-            }
-
-            @Override
-            public void onFailed(String error) {
-
-            }
-        });
+        Observable<ResultData<ArticleBean>> observable = service.articleList(requestData.getIntParams("page"));
+        NetWorkManager.getInstance().getDataFromServer(observable, requestData);
     }
 
 }

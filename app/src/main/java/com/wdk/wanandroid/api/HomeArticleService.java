@@ -1,5 +1,6 @@
 package com.wdk.wanandroid.api;
 
+import com.wdk.baselibrary.data.bean.ResultData;
 import com.wdk.wanandroid.data.bean.ArticleBean;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface HomeArticleService {
 //    https://www.wanandroid.com/article/list/1/json
 
     @GET("article/list/{page}/json")
-    Observable<ArticleBean> articleList(@Path("page") int page);
+    Observable<ResultData<ArticleBean>> articleList(@Path("page") int page);
 
 
 }

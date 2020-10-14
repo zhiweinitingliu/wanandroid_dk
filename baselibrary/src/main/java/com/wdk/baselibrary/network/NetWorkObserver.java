@@ -1,5 +1,6 @@
 package com.wdk.baselibrary.network;
 
+import com.wdk.baselibrary.data.bean.ResultData;
 import com.wdk.baselibrary.data.bean.ServiceDataBean;
 
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -16,35 +17,35 @@ import okhttp3.ResponseBody;
  * @LastModityTime(最终修改时间): 2020/9/21 10:16 PM
  * @LastCheckBy: wdk
  */
-public class NetWorkObserver<T> implements Observer<T> {
+public class NetWorkObserver<T> extends BaseRequestData.NetWorkObserver<T, ResultData<T>> {
 
-    private RequestData requestData;
-    private NetWorkCallBackListener<T> netWorkCallBackListener;
-
-    public NetWorkObserver(RequestData requestData, NetWorkCallBackListener<T> netWorkCallBackListener) {
-        this.requestData = requestData;
-        this.netWorkCallBackListener = netWorkCallBackListener;
-    }
+//    private RequestData requestData;
+////    private NetWorkCallBackListener<T> netWorkCallBackListener;
+//
+//    public NetWorkObserver(RequestData requestData) {
+//        this.requestData = requestData;
+////        this.netWorkCallBackListener = netWorkCallBackListener;
+//    }
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
-        if (requestData != null) {
-            requestData.requestStart();
+        if (mRequestData != null) {
+            mRequestData.requestStart();
         }
     }
 
     @Override
-    public void onNext(@NonNull T t) {
-        netWorkCallBackListener.onSuccess(t);
+    public void onNext(@NonNull ResultData<T> resultData) {
+        mRequestData.getNetWorkCallBackImpl().onSuccess(resultData);
     }
 
     @Override
     public void onError(@NonNull Throwable e) {
-        netWorkCallBackListener.onFailed(e.toString());
+        mRequestData.getNetWorkCallBackImpl().onFailed( e);
     }
 
     @Override
     public void onComplete() {
-        requestData.requestComplete();
+        mRequestData.requestComplete();
     }
 }

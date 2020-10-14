@@ -45,7 +45,7 @@ public class NetGsonConverterFactory extends Converter.Factory {
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new NetGsonResponseBodyConverter(gson, adapter);
+        return new NetGsonResponseBodyConverter<>(gson, adapter);
     }
 
     @Override

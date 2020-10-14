@@ -1,5 +1,6 @@
 package com.wdk.wanandroid.api;
 
+import com.wdk.baselibrary.data.bean.ResultData;
 import com.wdk.wanandroid.data.bean.LoginResponseBean;
 import com.wdk.wanandroid.data.bean.RegisterResponseBean;
 
@@ -27,11 +28,11 @@ public interface AccountService {
     //登录
     @FormUrlEncoded
     @POST("user/login")
-    Observable<LoginResponseBean> login(@Field("username") String username, @Field("password") String password);
+    Observable<ResultData<LoginResponseBean>> login(@Field("username") String username, @Field("password") String password);
 
 
     //注册
     @FormUrlEncoded
     @POST("user/register")
-    Observable<RegisterResponseBean> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+    Observable<ResultData<RegisterResponseBean>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
 }

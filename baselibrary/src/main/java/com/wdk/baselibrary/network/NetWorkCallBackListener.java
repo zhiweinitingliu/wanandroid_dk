@@ -13,6 +13,6 @@ public interface NetWorkCallBackListener<T> {
 
     void onSuccess(T t);
 
-    void onFailed(String error);
+    void onFailed(Throwable e);
 
 }

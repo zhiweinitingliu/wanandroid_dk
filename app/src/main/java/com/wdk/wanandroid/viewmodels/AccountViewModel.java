@@ -1,12 +1,14 @@
 package com.wdk.wanandroid.viewmodels;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.wdk.baselibrary.data.bean.ResultData;
+import com.wdk.baselibrary.network.CustomerCallBackListener;
 import com.wdk.baselibrary.network.NetMutableLiveData;
-import com.wdk.baselibrary.network.NetWorkFailedListener;
 import com.wdk.baselibrary.network.RequestData;
-import com.wdk.baselibrary.utils.CustomerToast;
 import com.wdk.baselibrary.viewmodel.BaseViewModel;
 import com.wdk.wanandroid.constances.MessageEvent;
 import com.wdk.wanandroid.data.bean.LoginResponseBean;
@@ -24,7 +26,7 @@ import org.greenrobot.eventbus.EventBus;
  * @LastModityTime(最终修改时间): 2020/9/22 10:05 AM
  * @LastCheckBy: wdk
  */
-public class AccountViewModel extends BaseViewModel implements NetWorkFailedListener {
+public class AccountViewModel extends BaseViewModel {
     private static final String TAG = "LoginViewModel";
 
     private LoginRepository loginRepository;
@@ -64,14 +66,24 @@ public class AccountViewModel extends BaseViewModel implements NetWorkFailedList
         });
     }
 
-
     public void doLogin(String username, String password) {
         loginRequestLiveData.postValue(1);
-        RequestData requestData = getRequestData();
-        requestData.setNetWorkFailedListener(101,this);
+        RequestData<LoginResponseBean> requestData = getRequestData(new CustomerCallBackListener<LoginResponseBean>() {
+
+            @Override
+            public void onSuccess(LoginResponseBean loginResponseBean, ResultData<LoginResponseBean> resultData) {
+                loginResponseLiveData.setValue(loginResponseBean);
+            }
+
+            @Override
+            public void onFailed(ResultData<LoginResponseBean> resultData) {
+                loginRequestLiveData.postValue(0);
+            }
+
+        });
         requestData.addParams("username", username)
                 .addParams("password", password);
-        loginRepository.doLogin(requestData, loginResponseLiveData);
+        loginRepository.doLogin(requestData);
     }
 
     /**
@@ -79,16 +91,51 @@ public class AccountViewModel extends BaseViewModel implements NetWorkFailedList
      */
     public void doRegister(String userName, String password, String rePassword) {
         registerRequestLiveData.postValue(1);
-        RequestData requestData = getRequestData();
-        requestData.setNetWorkFailedListener(102, this);
+        //获取网络请求数据封装的对象
+        RequestData<RegisterResponseBean> requestData = getRequestData(new CustomerCallBackListener<RegisterResponseBean>() {
+
+            @Override
+            public void onSuccess(RegisterResponseBean registerResponseBean, ResultData<RegisterResponseBean> resultData) {
+
+            }
+
+            @Override
+            public void onFailed(ResultData<RegisterResponseBean> resultData) {
+
+            }
+
+        });
+        //向网络请求封装的对象中添加请求需要的参数
         requestData.addParams("username", userName)
                 .addParams("password", password)
                 .addParams("repassword", rePassword);
-        loginRepository.doRegister(requestData, registerResponseLiveData);
+        //设置网络请求
+
+
+//        requestData.setHttpCallBack(new NetWorkCallBackListener<RegisterResponseBean>() {
+//            @Override
+//            public void onSuccess(RegisterResponseBean registerResponseBean) {
+//                try {
+//                    SharedPreferencesUtil.getInstance().putStringValue(Constants.user_info_json, new Gson().toJson(registerResponseBean));
+////                    netMutableLiveData.postValue(registerResponseBean);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailed(String error) {
+//                Log.e(TAG, "onFailed: " + error);
+//                registerRequestLiveData.postValue(2);
+//
+//            }
+//        } );
+        //通过repository发起网络请求
+        loginRepository.doRegister(requestData);
     }
 
-    private MutableLiveData<Integer> loginRequestLiveData=new MutableLiveData<>();
-    private MutableLiveData<Integer> registerRequestLiveData=new MutableLiveData<>();
+    private MutableLiveData<Integer> loginRequestLiveData = new MutableLiveData<>();
+    private MutableLiveData<Integer> registerRequestLiveData = new MutableLiveData<>();
 
     public MutableLiveData<Integer> getLoginRequestLiveData() {
         return loginRequestLiveData;
@@ -98,27 +145,27 @@ public class AccountViewModel extends BaseViewModel implements NetWorkFailedList
         return registerRequestLiveData;
     }
 
-    /**
-     * 接口失败的回调
-     *
-     * @param what  接口请求的标记 自己定义
-     * @param error 失败信息
-     */
-    @Override
-    public void onFailed(int what, String error) {
-
-        switch (what) {
-            //登录失败
-            case 101:
-                loginRequestLiveData.postValue(2);
-                break;
-            //注册
-            case 102:
-                registerRequestLiveData.postValue(2);
-                break;
-        }
-        CustomerToast.showToast(error);
-    }
+//    /**
+//     * 接口失败的回调
+//     *
+//     * @param what  接口请求的标记 自己定义
+//     * @param error 失败信息
+//     */
+//    @Override
+//    public void onFailed(int what, String error) {
+//
+//        switch (what) {
+//            //登录失败
+//            case 101:
+//                loginRequestLiveData.postValue(2);
+//                break;
+//            //注册
+//            case 102:
+//                registerRequestLiveData.postValue(2);
+//                break;
+//        }
+//        CustomerToast.showToast(error);
+//    }
 
 
 }

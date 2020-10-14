@@ -1,5 +1,8 @@
 package com.wdk.wanandroid.viewmodels;
 
+import com.wdk.baselibrary.data.bean.ResultData;
+import com.wdk.baselibrary.network.CustomerCallBackListener;
+import com.wdk.baselibrary.network.NetWorkCallBackListener;
 import com.wdk.baselibrary.viewmodel.BaseViewModel;
 import com.wdk.wanandroid.data.bean.ArticleBean;
 import com.wdk.baselibrary.network.NetMutableLiveData;
@@ -34,9 +37,32 @@ public class MainViewModel extends BaseViewModel {
     int current;
 
     public void getArticleList() {
-        RequestData requestData = getRequestData();
+        RequestData<ArticleBean> requestData = getRequestData(new CustomerCallBackListener<ArticleBean>() {
+
+            @Override
+            public void onSuccess(ArticleBean articleBean, ResultData<ArticleBean> resultData) {
+                mArticleList.postValue(articleBean.getDatas());
+            }
+
+            @Override
+            public void onFailed(ResultData<ArticleBean> resultData) {
+
+            }
+        });
         requestData.addParams("page", current);
-        homeRepository.getArticleList(requestData, mArticleList);
+//        requestData.setHttpCallBack(new NetWorkCallBackListener<ArticleBean>() {
+//            @Override
+//            public void onSuccess(ArticleBean articleBean) {
+//                mArticleList.postValue(articleBean.getDatas());
+//            }
+//
+//            @Override
+//            public void onFailed(String error) {
+//
+//            }
+//        });
+
+        homeRepository.getArticleList(requestData);
         current++;
     }
 

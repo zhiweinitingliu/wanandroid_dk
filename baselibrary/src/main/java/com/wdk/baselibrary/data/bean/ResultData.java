@@ -1,20 +1,23 @@
-package com.wdk.baselibrary.network.error;
+package com.wdk.baselibrary.data.bean;
+
+import java.io.Serializable;
 
 /**
- * Description :服务器正常返回code过滤非成功
+ * Description :
  *
  * @Author : wdk
- * @CreateTiem : 2020/9/23 4:50 PM
+ * @CreateTiem : 2020/10/14 10:23 AM
  * @LaseModify(最终修改人): wdk
- * @LastModityTime(最终修改时间): 2020/9/23 4:50 PM
+ * @LastModityTime(最终修改时间): 2020/10/14 10:23 AM
  * @LastCheckBy: wdk
  */
-public class ResponseException extends RuntimeException {
+public class ResultData<T> implements Serializable {
 
     private int errorCode;
 
-    private String errorMsg;
+    private T data;
 
+    private String errorMsg = "";
 
     public int getErrorCode() {
         return errorCode;
@@ -22,6 +25,14 @@ public class ResponseException extends RuntimeException {
 
     public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 
     public String getErrorMsg() {

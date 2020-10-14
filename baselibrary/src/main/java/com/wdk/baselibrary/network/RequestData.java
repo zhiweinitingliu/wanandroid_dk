@@ -1,5 +1,7 @@
 package com.wdk.baselibrary.network;
 
+import com.wdk.baselibrary.data.bean.ResultData;
+
 /**
  * Description : 请求携带的参数类
  *
@@ -9,9 +11,7 @@ package com.wdk.baselibrary.network;
  * @LastModityTime(最终修改时间): 2020/9/18 10:39 AM
  * @LastCheckBy: wdk
  */
-public class RequestData extends BaseRequestData {
-
-    private int what;
+public class RequestData<T> extends BaseRequestData<T> {
 
     public void requestStart() {
         if (getLoadingShowLiveData() != null) {
@@ -25,18 +25,16 @@ public class RequestData extends BaseRequestData {
         }
     }
 
-    private NetWorkFailedListener netWorkFailedListener;
 
-    public void setNetWorkFailedListener(int what, NetWorkFailedListener netWorkFailedListener) {
-        this.netWorkFailedListener = netWorkFailedListener;
-        this.what = what;
+    private NetWorkObserver<T, ResultData<T>> netWorkObserver;
+
+    public NetWorkObserver<T, ResultData<T>> getNetWorkObserver() {
+        return netWorkObserver;
     }
 
-    public NetWorkFailedListener getNetWorkFailedListener() {
-        return netWorkFailedListener;
+    public void setNetWorkObserver(NetWorkObserver<T, ResultData<T>> netWorkObserver) {
+        this.netWorkObserver = netWorkObserver;
+        netWorkObserver.setRequestData(this);
     }
 
-    public int getWhat() {
-        return what;
-    }
 }
