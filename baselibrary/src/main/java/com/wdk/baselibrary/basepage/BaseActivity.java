@@ -1,15 +1,20 @@
 package com.wdk.baselibrary.basepage;
 
+import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.Observer;
 
 import com.wdk.baselibrary.R;
+import com.wdk.baselibrary.network.loading.CustomerLoadDialog;
+import com.wdk.baselibrary.utils.CustomerToast;
 import com.wdk.baselibrary.utils.ViewUtil;
 
 /**
@@ -43,6 +48,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends DataBindin
 
     @Override
     public void initLoadingListener() {
+        //loading方法2：1开始网络请求 2网络请求成功  3网络请求失败
         loadingShowLiveData.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
@@ -52,6 +58,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends DataBindin
                         break;
 
                     case 2:
+                    case 3:
                         hideLoading();
                         break;
                 }
@@ -90,12 +97,23 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends DataBindin
         }
     }
 
+    CustomerLoadDialog customerLoadDialog;
 
     /**
      * 网络请求开始
      */
     public void showLoading() {
+        showLoading("");
+    }
 
+    public void showLoading(String msg) {
+        if (customerLoadDialog == null && !isFinishing()) {
+            customerLoadDialog = new CustomerLoadDialog(this);
+        }
+
+        if (!isFinishing()) {
+            customerLoadDialog.show();
+        }
     }
 
 
@@ -103,6 +121,8 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends DataBindin
      * 网络请求结束
      */
     public void hideLoading() {
-
+        if (customerLoadDialog != null && !isFinishing() && customerLoadDialog.isShowing()) {
+            customerLoadDialog.dismiss();
+        }
     }
 }

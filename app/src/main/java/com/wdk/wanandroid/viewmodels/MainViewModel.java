@@ -37,30 +37,21 @@ public class MainViewModel extends BaseViewModel {
     int current;
 
     public void getArticleList() {
-        RequestData<ArticleBean> requestData = getRequestData(new CustomerCallBackListener<ArticleBean>() {
+        RequestData<ArticleBean> requestData = getRequestData();
+        requestData.setShowLoading(true)
+                .addParams("page", current)
+                .addCallBackListener(new CustomerCallBackListener<ArticleBean>() {
 
-            @Override
-            public void onSuccess(ArticleBean articleBean, ResultData<ArticleBean> resultData) {
-                mArticleList.postValue(articleBean.getDatas());
-            }
+                    @Override
+                    public void onSuccess(ArticleBean articleBean, ResultData<ArticleBean> resultData) {
+                        mArticleList.postValue(articleBean.getDatas());
+                    }
 
-            @Override
-            public void onFailed(ResultData<ArticleBean> resultData) {
+                    @Override
+                    public void onFailed(ResultData<ArticleBean> resultData) {
 
-            }
-        });
-        requestData.addParams("page", current);
-//        requestData.setHttpCallBack(new NetWorkCallBackListener<ArticleBean>() {
-//            @Override
-//            public void onSuccess(ArticleBean articleBean) {
-//                mArticleList.postValue(articleBean.getDatas());
-//            }
-//
-//            @Override
-//            public void onFailed(String error) {
-//
-//            }
-//        });
+                    }
+                });
 
         homeRepository.getArticleList(requestData);
         current++;

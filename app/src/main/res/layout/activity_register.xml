@@ -127,7 +127,7 @@
             android:layout_marginRight="25dp"
             android:background="@drawable/shape_login_login_btn"
             android:onClick="toRegister"
-            android:text="注册"
+            android:text='@{accountViewModel.isLoading?"请稍等...":"注册",default="注册"}'
             android:textColor="@color/colorFFFFFF"
             android:textSize="18dp" />
 

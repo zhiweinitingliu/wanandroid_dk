@@ -29,6 +29,14 @@ public class NetWorkCallBackImpl<T> implements NetWorkCallBackListener<ResultDat
 
     @Override
     public void onSuccess(ResultData<T> resultData) {
+        if (netFilter == null || netFilter.customerCallBackListener == null) {
+            System.out.println("监听对象nullPointException success");
+            return;
+        }
+        if (netFilter.requestData.isShowLoading()) {
+            netFilter.baseViewModel.setIsLoading(false);
+            netFilter.baseViewModel.getLoadingShowLiveData().postValue(2);
+        }
 
         switch (resultData.getErrorCode()) {
             //成功
@@ -52,6 +60,17 @@ public class NetWorkCallBackImpl<T> implements NetWorkCallBackListener<ResultDat
 
     @Override
     public void onFailed(Throwable e) {
+        if (netFilter == null || netFilter.customerCallBackListener == null) {
+            System.out.println("监听对象nullPointException Failed");
+            return;
+        }
+
+        //需要loading回调的时候才回调
+        if (netFilter.requestData.isShowLoading()) {
+            netFilter.baseViewModel.getLoadingShowLiveData().postValue(3);
+            netFilter.baseViewModel.setIsLoading(false);
+        }
+
         ResultData<T> resultData = new ResultData<>();
         if (e != null && TextUtils.isEmpty(e.getMessage())) {
             resultData.setErrorMsg(e.getMessage());

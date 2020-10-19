@@ -30,8 +30,10 @@ import io.reactivex.rxjava3.disposables.Disposable;
  */
 public class BaseViewModel extends ViewModel {
 
+    //loading方法1，回调到具体控件的loading
     ObservableBoolean mIsLoading = new ObservableBoolean();
 
+    //loading方法2：1开始网络请求 2网络请求成功  3网络请求失败
     public MutableLiveData<Integer> loadingShowLiveData;
 
     public MutableLiveData<Integer> getLoadingShowLiveData() {
@@ -56,7 +58,7 @@ public class BaseViewModel extends ViewModel {
      *
      * @return requestData
      */
-    public <T> RequestData<T> getRequestData(CustomerCallBackListener<T> customerCallBackListener) {
+    public <T> RequestData<T> getRequestData() {
         //获取requestData对象
         RequestData<T> requestData = new RequestData<>();
 
@@ -67,12 +69,7 @@ public class BaseViewModel extends ViewModel {
         requestData.setNetWorkObserver(netWorkObserver);
 
         //监听返回的数据进行拦截
-        NetFilter<T> netFilter = new NetFilter<>(this, requestData, customerCallBackListener);
-
-        //服务器数据返回的回调
-        NetWorkCallBackImpl<T> netWorkCallBackImpl = new NetWorkCallBackImpl<>(netFilter);
-        requestData.setHttpCallBack(netWorkCallBackImpl);
-
+        requestData.setNetFilter(new NetFilter<T>(this, requestData));
         return requestData;
     }
 
@@ -81,12 +78,14 @@ public class BaseViewModel extends ViewModel {
         public RequestData<T> requestData;
         public CustomerCallBackListener<T> customerCallBackListener;
 
-        public NetFilter(BaseViewModel baseViewModel, RequestData<T> requestData, CustomerCallBackListener<T> customerCallBackListener) {
+        public NetFilter(BaseViewModel baseViewModel, RequestData<T> requestData) {
             this.baseViewModel = baseViewModel;
             this.requestData = requestData;
-            this.customerCallBackListener = customerCallBackListener;
         }
 
+        public void setCustomerCallBackListener(CustomerCallBackListener<T> customerCallBackListener) {
+            this.customerCallBackListener = customerCallBackListener;
+        }
     }
 
 

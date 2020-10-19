@@ -29,9 +29,9 @@ public class NetWorkObserver<T> extends BaseRequestData.NetWorkObserver<T, Resul
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
-        if (mRequestData != null) {
-            mRequestData.requestStart();
-        }
+//        if (mRequestData != null) {
+//            mRequestData.requestStart();
+//        }
     }
 
     @Override
@@ -46,6 +46,6 @@ public class NetWorkObserver<T> extends BaseRequestData.NetWorkObserver<T, Resul
 
     @Override
     public void onComplete() {
-        mRequestData.requestComplete();
+//        mRequestData.requestComplete();
     }
 }

@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import com.wdk.baselibrary.basepage.BaseActivity;
 import com.wdk.baselibrary.basepage.DataBindingConfig;
 import com.wdk.baselibrary.utils.CustomerToast;
+import com.wdk.wanandroid.BR;
 import com.wdk.wanandroid.R;
 import com.wdk.wanandroid.databinding.ActivityRegisterBinding;
 import com.wdk.wanandroid.viewmodels.AccountViewModel;
@@ -34,7 +35,9 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> {
 
     @Override
     protected DataBindingConfig getDataBindingConfig() {
-        return new DataBindingConfig(R.layout.activity_register);
+        DataBindingConfig dataBindingConfig = new DataBindingConfig(R.layout.activity_register);
+        dataBindingConfig.addBindingParam(BR.accountViewModel, accountViewModel);
+        return dataBindingConfig;
     }
 
     @Override
@@ -46,20 +49,6 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> {
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
                     finish();
-                }
-            }
-        });
-
-
-        accountViewModel.getRegisterRequestLiveData().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                if (integer == 1) {
-                    getMBinding().btnRegister.setEnabled(false);
-                    getMBinding().btnRegister.setText("请稍等...");
-                } else {
-                    getMBinding().btnRegister.setText("注册");
-                    getMBinding().btnRegister.setEnabled(true);
                 }
             }
         });
@@ -90,6 +79,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> {
         }
 
         accountViewModel.doRegister(userName, password, rePassword);
+        showLoading();
 
     }
 

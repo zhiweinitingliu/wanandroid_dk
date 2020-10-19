@@ -13,17 +13,20 @@ import com.wdk.baselibrary.data.bean.ResultData;
  */
 public class RequestData<T> extends BaseRequestData<T> {
 
-    public void requestStart() {
-        if (getLoadingShowLiveData() != null) {
-            getLoadingShowLiveData().postValue(1);
-        }
-    }
+    private boolean isShowLoading;
 
-    public void requestComplete() {
-        if (getLoadingShowLiveData() != null) {
-            getLoadingShowLiveData().postValue(2);
-        }
-    }
+
+//    public void requestStart() {
+//        if (getLoadingShowLiveData() != null) {
+//            getLoadingShowLiveData().postValue(1);
+//        }
+//    }
+//
+//    public void requestComplete() {
+//        if (getLoadingShowLiveData() != null) {
+//            getLoadingShowLiveData().postValue(2);
+//        }
+//    }
 
 
     private NetWorkObserver<T, ResultData<T>> netWorkObserver;
@@ -37,4 +40,16 @@ public class RequestData<T> extends BaseRequestData<T> {
         netWorkObserver.setRequestData(this);
     }
 
+    public boolean isShowLoading() {
+        return isShowLoading;
+    }
+
+    public RequestData<T> setShowLoading(boolean showLoading) {
+        isShowLoading = showLoading;
+        if (isShowLoading) {
+            getNetFilter().baseViewModel.setIsLoading(isShowLoading);
+            getLoadingShowLiveData().postValue(1);
+        }
+        return this;
+    }
 }
