@@ -98,7 +98,7 @@
             android:layout_marginRight="25dp"
             android:background="@drawable/shape_login_login_btn"
             android:onClick="doLogin"
-            android:text="登录"
+            android:text='@{accountViewModel.isLoading?"登录中...":"登录",default="登录"}'
 
             android:textColor="@color/colorFFFFFF"
             android:textSize="18dp" />

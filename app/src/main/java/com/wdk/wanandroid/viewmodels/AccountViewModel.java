@@ -1,7 +1,5 @@
 package com.wdk.wanandroid.viewmodels;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
@@ -51,7 +49,7 @@ public class AccountViewModel extends BaseViewModel {
             @Override
             public void onChanged(LoginResponseBean loginResponseBean) {
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.login_success));
-                loginResultLiveData.postValue(true);
+//                loginResultLiveData.postValue(true);
             }
         });
 
@@ -61,13 +59,14 @@ public class AccountViewModel extends BaseViewModel {
             @Override
             public void onChanged(RegisterResponseBean registerResponseBean) {
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.login_success));
-                registerResultLiveData.postValue(true);
+//                registerResultLiveData.postValue(true);
             }
         });
     }
 
     public void doLogin(String username, String password) {
-        loginRequestLiveData.postValue(1);
+//        loginRequestLiveData.postValue(1);
+        setIsLoading(true);
         RequestData<LoginResponseBean> requestData = getRequestData(new CustomerCallBackListener<LoginResponseBean>() {
 
             @Override
@@ -77,7 +76,7 @@ public class AccountViewModel extends BaseViewModel {
 
             @Override
             public void onFailed(ResultData<LoginResponseBean> resultData) {
-                loginRequestLiveData.postValue(0);
+                setIsLoading(false);
             }
 
         });
@@ -90,7 +89,8 @@ public class AccountViewModel extends BaseViewModel {
      * 注册
      */
     public void doRegister(String userName, String password, String rePassword) {
-        registerRequestLiveData.postValue(1);
+//        registerRequestLiveData.postValue(1);
+        setIsLoading(true);
         //获取网络请求数据封装的对象
         RequestData<RegisterResponseBean> requestData = getRequestData(new CustomerCallBackListener<RegisterResponseBean>() {
 
@@ -101,7 +101,7 @@ public class AccountViewModel extends BaseViewModel {
 
             @Override
             public void onFailed(ResultData<RegisterResponseBean> resultData) {
-
+                setIsLoading(false);
             }
 
         });

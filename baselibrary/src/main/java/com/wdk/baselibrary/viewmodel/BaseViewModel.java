@@ -1,6 +1,7 @@
 package com.wdk.baselibrary.viewmodel;
 
 import androidx.annotation.RequiresApi;
+import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -29,6 +30,8 @@ import io.reactivex.rxjava3.disposables.Disposable;
  */
 public class BaseViewModel extends ViewModel {
 
+    ObservableBoolean mIsLoading = new ObservableBoolean();
+
     public MutableLiveData<Integer> loadingShowLiveData;
 
     public MutableLiveData<Integer> getLoadingShowLiveData() {
@@ -37,6 +40,14 @@ public class BaseViewModel extends ViewModel {
 
     public void setLoadingShowLiveData(MutableLiveData<Integer> loadingShowLiveData) {
         this.loadingShowLiveData = loadingShowLiveData;
+    }
+
+    public ObservableBoolean getIsLoading() {
+        return mIsLoading;
+    }
+
+    public void setIsLoading(boolean isLoading) {
+        mIsLoading.set(isLoading);
     }
 
 

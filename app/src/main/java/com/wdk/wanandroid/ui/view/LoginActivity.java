@@ -47,18 +47,18 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
             }
         });
 
-        accountViewModel.getLoginRequestLiveData().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                if (integer == 1) {
-                    getMBinding().btnLogin.setEnabled(false);
-                    getMBinding().btnLogin.setText("登录中...");
-                } else {
-                    getMBinding().btnLogin.setText("登录");
-                    getMBinding().btnLogin.setEnabled(true);
-                }
-            }
-        });
+//        accountViewModel.getLoginRequestLiveData().observe(this, new Observer<Integer>() {
+//            @Override
+//            public void onChanged(Integer integer) {
+//                if (integer == 1) {
+//                    getMBinding().btnLogin.setEnabled(false);
+//                    getMBinding().btnLogin.setText("登录中...");
+//                } else {
+//                    getMBinding().btnLogin.setText("登录");
+//                    getMBinding().btnLogin.setEnabled(true);
+//                }
+//            }
+//        });
     }
 
     @Override
