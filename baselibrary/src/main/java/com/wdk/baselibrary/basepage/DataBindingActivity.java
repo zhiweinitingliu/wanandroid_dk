@@ -24,7 +24,7 @@ import com.wdk.baselibrary.viewmodel.BaseViewModel;
  */
 public abstract class DataBindingActivity<T extends ViewDataBinding> extends AppCompatActivity {
     private ViewModelProvider mViewModelProvider;
-    private T mBinding;
+    public T mBinding;
 
     /**
      * 1、 开始加载loading

@@ -1,4 +1,4 @@
-package com.wdk.wanandroid.ui.adapter;
+package com.wdk.wanandroid.ui.home;
 
 import android.content.Context;
 import android.view.View;

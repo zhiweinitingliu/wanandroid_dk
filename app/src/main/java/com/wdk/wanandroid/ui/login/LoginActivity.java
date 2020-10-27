@@ -1,4 +1,4 @@
-package com.wdk.wanandroid.ui.view;
+package com.wdk.wanandroid.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.Observable;
 import androidx.lifecycle.Observer;
 
 import com.wdk.baselibrary.basepage.BaseActivity;
@@ -16,6 +15,7 @@ import com.wdk.baselibrary.basepage.DataBindingConfig;
 import com.wdk.wanandroid.BR;
 import com.wdk.wanandroid.R;
 import com.wdk.wanandroid.databinding.ActivityLoginBinding;
+import com.wdk.wanandroid.ui.register.RegisterActivity;
 import com.wdk.wanandroid.viewmodels.AccountViewModel;
 
 

@@ -1,4 +1,4 @@
-package com.wdk.wanandroid.viewmodels;
+package com.wdk.wanandroid.ui.main;
 
 import com.wdk.baselibrary.data.bean.ResultData;
 import com.wdk.baselibrary.network.CustomerCallBackListener;

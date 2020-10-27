@@ -1,4 +1,4 @@
-package com.wdk.wanandroid.ui.view;
+package com.wdk.wanandroid.ui;
 
 import android.app.Application;
 
@@ -13,7 +13,7 @@ import com.wdk.baselibrary.basepage.AppInitUtil;
  * @LastModityTime(最终修改时间): 2020/9/22 1:07 PM
  * @LastCheckBy: wdk
  */
-public class AppApplication  extends Application {
+public class AppApplication extends Application {
 
     @Override
     public void onCreate() {

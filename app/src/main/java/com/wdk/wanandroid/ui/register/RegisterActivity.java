@@ -1,4 +1,4 @@
-package com.wdk.wanandroid.ui.view;
+package com.wdk.wanandroid.ui.register;
 
 import android.os.Bundle;
 import android.text.TextUtils;
