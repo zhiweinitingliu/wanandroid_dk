@@ -1,12 +1,11 @@
-package com.wdk.wanandroid.ui.main;
+package com.wdk.wanandroid.ui.home;
 
 import com.wdk.baselibrary.data.bean.ResultData;
 import com.wdk.baselibrary.network.CustomerCallBackListener;
-import com.wdk.baselibrary.viewmodel.BaseViewModel;
-import com.wdk.wanandroid.data.bean.ArticleBean;
 import com.wdk.baselibrary.network.NetMutableLiveData;
 import com.wdk.baselibrary.network.RequestData;
-import com.wdk.wanandroid.ui.home.HomeRepository;
+import com.wdk.baselibrary.viewmodel.BaseViewModel;
+import com.wdk.wanandroid.data.bean.ArticleBean;
 
 import java.util.List;
 
@@ -14,23 +13,25 @@ import java.util.List;
  * Description :
  *
  * @Author : wdk
- * @CreateTiem : 2020/9/16 8:53 AM
+ * @CreateTiem : 2020/10/28 9:25 PM
  * @LaseModify(最终修改人): wdk
- * @LastModityTime(最终修改时间): 2020/9/16 8:53 AM
+ * @LastModityTime(最终修改时间): 2020/10/28 9:25 PM
  * @LastCheckBy: wdk
  */
-public class MainViewModel extends BaseViewModel {
-
-    private static final String TAG = "MainViewModel";
+public class HomeViewModel extends BaseViewModel {
 
     private HomeRepository homeRepository;
 
     private NetMutableLiveData<List<ArticleBean.ArticleChildBean>> mArticleList;
 
-    public MainViewModel() {
+    public HomeViewModel(){
         homeRepository = new HomeRepository();
         //文章列表的
         mArticleList = new NetMutableLiveData<>();
+    }
+
+    public NetMutableLiveData<List<ArticleBean.ArticleChildBean>> getmArticleList() {
+        return mArticleList;
     }
 
     int current;
@@ -54,9 +55,5 @@ public class MainViewModel extends BaseViewModel {
 
         homeRepository.getArticleList(requestData);
         current++;
-    }
-
-    public NetMutableLiveData<List<ArticleBean.ArticleChildBean>> getmArticleList() {
-        return mArticleList;
     }
 }

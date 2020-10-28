@@ -1,4 +1,4 @@
-package com.wdk.wanandroid.data.repository;
+package com.wdk.wanandroid.ui.home;
 
 import android.util.Log;
 
