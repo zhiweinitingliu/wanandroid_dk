@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
         //获取首页数据
         homeViewModel.getArticleList();
 
-        homeViewModel.getmArticleList().observe(this, new Observer<List<ArticleBean.ArticleChildBean>>() {
+        homeViewModel.getmArticleList().observe(getViewLifecycleOwner(), new Observer<List<ArticleBean.ArticleChildBean>>() {
             @Override
             public void onChanged(List<ArticleBean.ArticleChildBean> articleBeans) {
                 Log.e(TAG, "article_onChanged: " + articleBeans.size());
