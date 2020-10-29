@@ -1,68 +1,83 @@
 package com.wdk.wanandroid.ui.home;
 
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.wdk.baselibrary.basepage.BaseFragment;
+import com.wdk.baselibrary.basepage.DataBindingConfig;
+import com.wdk.wanandroid.BR;
 import com.wdk.wanandroid.R;
-import com.wdk.wanandroid.data.bean.ArticleBean;
+import com.wdk.wanandroid.data.bean.home.ArticleChildBean;
+import com.wdk.wanandroid.data.bean.home.BannerBean;
+import com.wdk.wanandroid.data.bean.home.BannerChildBean;
+import com.wdk.wanandroid.data.bean.home.HomeArticleBean;
+import com.wdk.wanandroid.data.bean.home.HomeBannerBean;
+import com.wdk.wanandroid.data.bean.home.HomeBaseBean;
 import com.wdk.wanandroid.databinding.FragmentHomeBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     private static final String TAG = "HomeFragment";
 
     private HomeViewModel homeViewModel;
-    FragmentHomeBinding mBinding;
-    /**
-     * 1、 开始加载loading
-     * 2、加载完成 loading
-     */
-    public MutableLiveData<Integer> loadingShowLiveData = new MutableLiveData<>();
 
+    //    private ArticleListAdapter articleListAdapter;
+    private HomeAdapter homeAdapter;
+    List<HomeBaseBean> homeBeanList;
 
-    private ArticleListAdapter articleListAdapter;
-
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.setLoadingShowLiveData(loadingShowLiveData);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        mBinding = FragmentHomeBinding.bind(root);
-        return root;
+    @Override
+    protected void initViewModel() {
+        homeViewModel = getFragmentViewModel(HomeViewModel.class);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        articleListAdapter = new ArticleListAdapter(getActivity());
-        mBinding.recyclerView.setAdapter(articleListAdapter);
-        //获取首页数据
-        homeViewModel.getArticleList();
+    protected DataBindingConfig getDataBindingConfig() {
+        DataBindingConfig dataBindingConfig = new DataBindingConfig(R.layout.fragment_home);
+        dataBindingConfig.addBindingParam(BR.homeViewModel, homeViewModel);
+        return dataBindingConfig;
+    }
 
-        homeViewModel.getmArticleList().observe(getViewLifecycleOwner(), new Observer<List<ArticleBean.ArticleChildBean>>() {
+    @Override
+    public void initData() {
+        homeBeanList = new ArrayList<>();
+        mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        homeAdapter = new HomeAdapter(getActivity());
+        mBinding.recyclerView.setAdapter(homeAdapter);
+
+        homeViewModel.getBannerLiveData().observe(getViewLifecycleOwner(), new Observer<List<BannerChildBean>>() {
             @Override
-            public void onChanged(List<ArticleBean.ArticleChildBean> articleBeans) {
-                Log.e(TAG, "article_onChanged: " + articleBeans.size());
-                articleListAdapter.getItems().addAll(articleBeans);
-                articleListAdapter.notifyDataSetChanged();
+            public void onChanged(List<BannerChildBean> bannerChildBeanList) {
+                HomeBannerBean homeBannerBean = new HomeBannerBean();
+                homeBannerBean.setBannerChildBeanList(bannerChildBeanList);
+                homeBeanList.add(homeBannerBean);
+                homeAdapter.setHomeData(homeBeanList);
+                homeAdapter.notifyDataSetChanged();
             }
         });
+        homeViewModel.getHomeBanner();
+
+        homeViewModel.getArticleListLiveData().observe(getViewLifecycleOwner(), new Observer<List<ArticleChildBean>>() {
+            @Override
+            public void onChanged(List<ArticleChildBean> articleBeans) {
+                Log.e(TAG, "article_onChanged: " + articleBeans.size());
+                if (articleBeans.size() > 0) {
+                    for (int i = 0; i < articleBeans.size(); i++) {
+                        HomeArticleBean homeArticleBean = new HomeArticleBean();
+                        homeArticleBean.setArticleChildBean(articleBeans.get(i));
+                        homeBeanList.add(homeArticleBean);
+                    }
+                    homeAdapter.setHomeData(homeBeanList);
+                    homeAdapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+        //获取首页数据
+        homeViewModel.getArticleList();
     }
 }

@@ -41,6 +41,11 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> {
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitleName("注册");

@@ -1,20 +1,15 @@
 package com.wdk.baselibrary.basepage;
 
-import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.Observer;
 
 import com.wdk.baselibrary.R;
 import com.wdk.baselibrary.network.loading.CustomerLoadDialog;
-import com.wdk.baselibrary.utils.CustomerToast;
 import com.wdk.baselibrary.utils.ViewUtil;
 
 /**

@@ -15,9 +15,16 @@ import com.wdk.baselibrary.basepage.AppInitUtil;
  */
 public class AppApplication extends Application {
 
+    private static AppApplication application;
+
+    public static AppApplication getInstance() {
+        return application;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        application=this;
         AppInitUtil.getInstance().init(this);
     }
 }

@@ -1,4 +1,4 @@
-package com.wdk.wanandroid.data.bean;
+package com.wdk.wanandroid.data.bean.home;
 
 import com.wdk.baselibrary.data.bean.BaseBean;
 
@@ -8,15 +8,13 @@ import java.util.List;
  * Description :
  *
  * @Author : wdk
- * @CreateTiem : 2020/9/16 8:55 AM
+ * @CreateTiem : 2020/10/29 2:42 PM
  * @LaseModify(最终修改人): wdk
- * @LastModityTime(最终修改时间): 2020/9/16 8:55 AM
+ * @LastModityTime(最终修改时间): 2020/10/29 2:42 PM
  * @LastCheckBy: wdk
  */
-public class ArticleBean extends ListBaseBean<ArticleBean.ArticleChildBean> {
+public class ArticleChildBean extends BaseBean {
 
-
-    public static class ArticleChildBean extends BaseBean{
 
 
         /**
@@ -88,260 +86,260 @@ public class ArticleBean extends ListBaseBean<ArticleBean.ArticleChildBean> {
         private List<TagsBean> tags;
 
         public String getApkLink() {
-            return apkLink;
-        }
+        return apkLink;
+    }
 
         public void setApkLink(String apkLink) {
-            this.apkLink = apkLink;
-        }
+        this.apkLink = apkLink;
+    }
 
         public int getAudit() {
-            return audit;
-        }
+        return audit;
+    }
 
         public void setAudit(int audit) {
-            this.audit = audit;
-        }
+        this.audit = audit;
+    }
 
         public String getAuthor() {
-            return author;
-        }
+        return author;
+    }
 
         public void setAuthor(String author) {
-            this.author = author;
-        }
+        this.author = author;
+    }
 
         public boolean isCanEdit() {
-            return canEdit;
-        }
+        return canEdit;
+    }
 
         public void setCanEdit(boolean canEdit) {
-            this.canEdit = canEdit;
-        }
+        this.canEdit = canEdit;
+    }
 
         public int getChapterId() {
-            return chapterId;
-        }
+        return chapterId;
+    }
 
         public void setChapterId(int chapterId) {
-            this.chapterId = chapterId;
-        }
+        this.chapterId = chapterId;
+    }
 
         public String getChapterName() {
-            return chapterName;
-        }
+        return chapterName;
+    }
 
         public void setChapterName(String chapterName) {
-            this.chapterName = chapterName;
-        }
+        this.chapterName = chapterName;
+    }
 
         public boolean isCollect() {
-            return collect;
-        }
+        return collect;
+    }
 
         public void setCollect(boolean collect) {
-            this.collect = collect;
-        }
+        this.collect = collect;
+    }
 
         public int getCourseId() {
-            return courseId;
-        }
+        return courseId;
+    }
 
         public void setCourseId(int courseId) {
-            this.courseId = courseId;
-        }
+        this.courseId = courseId;
+    }
 
         public String getDesc() {
-            return desc;
-        }
+        return desc;
+    }
 
         public void setDesc(String desc) {
-            this.desc = desc;
-        }
+        this.desc = desc;
+    }
 
         public String getDescMd() {
-            return descMd;
-        }
+        return descMd;
+    }
 
         public void setDescMd(String descMd) {
-            this.descMd = descMd;
-        }
+        this.descMd = descMd;
+    }
 
         public String getEnvelopePic() {
-            return envelopePic;
-        }
+        return envelopePic;
+    }
 
         public void setEnvelopePic(String envelopePic) {
-            this.envelopePic = envelopePic;
-        }
+        this.envelopePic = envelopePic;
+    }
 
         public boolean isFresh() {
-            return fresh;
-        }
+        return fresh;
+    }
 
         public void setFresh(boolean fresh) {
-            this.fresh = fresh;
-        }
+        this.fresh = fresh;
+    }
 
         public int getId() {
-            return id;
-        }
+        return id;
+    }
 
         public void setId(int id) {
-            this.id = id;
-        }
+        this.id = id;
+    }
 
         public String getLink() {
-            return link;
-        }
+        return link;
+    }
 
         public void setLink(String link) {
-            this.link = link;
-        }
+        this.link = link;
+    }
 
         public String getNiceDate() {
-            return niceDate;
-        }
+        return niceDate;
+    }
 
         public void setNiceDate(String niceDate) {
-            this.niceDate = niceDate;
-        }
+        this.niceDate = niceDate;
+    }
 
         public String getNiceShareDate() {
-            return niceShareDate;
-        }
+        return niceShareDate;
+    }
 
         public void setNiceShareDate(String niceShareDate) {
-            this.niceShareDate = niceShareDate;
-        }
+        this.niceShareDate = niceShareDate;
+    }
 
         public String getOrigin() {
-            return origin;
-        }
+        return origin;
+    }
 
         public void setOrigin(String origin) {
-            this.origin = origin;
-        }
+        this.origin = origin;
+    }
 
         public String getPrefix() {
-            return prefix;
-        }
+        return prefix;
+    }
 
         public void setPrefix(String prefix) {
-            this.prefix = prefix;
-        }
+        this.prefix = prefix;
+    }
 
         public String getProjectLink() {
-            return projectLink;
-        }
+        return projectLink;
+    }
 
         public void setProjectLink(String projectLink) {
-            this.projectLink = projectLink;
-        }
+        this.projectLink = projectLink;
+    }
 
         public long getPublishTime() {
-            return publishTime;
-        }
+        return publishTime;
+    }
 
         public void setPublishTime(long publishTime) {
-            this.publishTime = publishTime;
-        }
+        this.publishTime = publishTime;
+    }
 
         public int getRealSuperChapterId() {
-            return realSuperChapterId;
-        }
+        return realSuperChapterId;
+    }
 
         public void setRealSuperChapterId(int realSuperChapterId) {
-            this.realSuperChapterId = realSuperChapterId;
-        }
+        this.realSuperChapterId = realSuperChapterId;
+    }
 
         public int getSelfVisible() {
-            return selfVisible;
-        }
+        return selfVisible;
+    }
 
         public void setSelfVisible(int selfVisible) {
-            this.selfVisible = selfVisible;
-        }
+        this.selfVisible = selfVisible;
+    }
 
         public long getShareDate() {
-            return shareDate;
-        }
+        return shareDate;
+    }
 
         public void setShareDate(long shareDate) {
-            this.shareDate = shareDate;
-        }
+        this.shareDate = shareDate;
+    }
 
         public String getShareUser() {
-            return shareUser;
-        }
+        return shareUser;
+    }
 
         public void setShareUser(String shareUser) {
-            this.shareUser = shareUser;
-        }
+        this.shareUser = shareUser;
+    }
 
         public int getSuperChapterId() {
-            return superChapterId;
-        }
+        return superChapterId;
+    }
 
         public void setSuperChapterId(int superChapterId) {
-            this.superChapterId = superChapterId;
-        }
+        this.superChapterId = superChapterId;
+    }
 
         public String getSuperChapterName() {
-            return superChapterName;
-        }
+        return superChapterName;
+    }
 
         public void setSuperChapterName(String superChapterName) {
-            this.superChapterName = superChapterName;
-        }
+        this.superChapterName = superChapterName;
+    }
 
         public String getTitle() {
-            return title;
-        }
+        return title;
+    }
 
         public void setTitle(String title) {
-            this.title = title;
-        }
+        this.title = title;
+    }
 
         public int getType() {
-            return type;
-        }
+        return type;
+    }
 
         public void setType(int type) {
-            this.type = type;
-        }
+        this.type = type;
+    }
 
         public int getUserId() {
-            return userId;
-        }
+        return userId;
+    }
 
         public void setUserId(int userId) {
-            this.userId = userId;
-        }
+        this.userId = userId;
+    }
 
         public int getVisible() {
-            return visible;
-        }
+        return visible;
+    }
 
         public void setVisible(int visible) {
-            this.visible = visible;
-        }
+        this.visible = visible;
+    }
 
         public int getZan() {
-            return zan;
-        }
+        return zan;
+    }
 
         public void setZan(int zan) {
-            this.zan = zan;
-        }
+        this.zan = zan;
+    }
 
         public List<TagsBean> getTags() {
-            return tags;
-        }
+        return tags;
+    }
 
         public void setTags(List<TagsBean> tags) {
-            this.tags = tags;
-        }
+        this.tags = tags;
+    }
 
         public static class TagsBean {
             /**
@@ -370,4 +368,4 @@ public class ArticleBean extends ListBaseBean<ArticleBean.ArticleChildBean> {
         }
 
     }
-}
+

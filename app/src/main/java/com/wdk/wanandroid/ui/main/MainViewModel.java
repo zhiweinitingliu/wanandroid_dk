@@ -3,9 +3,10 @@ package com.wdk.wanandroid.ui.main;
 import com.wdk.baselibrary.data.bean.ResultData;
 import com.wdk.baselibrary.network.CustomerCallBackListener;
 import com.wdk.baselibrary.viewmodel.BaseViewModel;
-import com.wdk.wanandroid.data.bean.ArticleBean;
+import com.wdk.wanandroid.data.bean.home.ArticleBean;
 import com.wdk.baselibrary.network.NetMutableLiveData;
 import com.wdk.baselibrary.network.RequestData;
+import com.wdk.wanandroid.data.bean.home.ArticleChildBean;
 import com.wdk.wanandroid.ui.home.HomeRepository;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class MainViewModel extends BaseViewModel {
 
     private HomeRepository homeRepository;
 
-    private NetMutableLiveData<List<ArticleBean.ArticleChildBean>> mArticleList;
+    private NetMutableLiveData<List<ArticleChildBean>> mArticleList;
 
     public MainViewModel() {
         homeRepository = new HomeRepository();
@@ -56,7 +57,7 @@ public class MainViewModel extends BaseViewModel {
         current++;
     }
 
-    public NetMutableLiveData<List<ArticleBean.ArticleChildBean>> getmArticleList() {
+    public NetMutableLiveData<List<ArticleChildBean>> getmArticleList() {
         return mArticleList;
     }
 }

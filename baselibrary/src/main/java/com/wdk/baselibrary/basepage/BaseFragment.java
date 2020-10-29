@@ -2,12 +2,15 @@ package com.wdk.baselibrary.basepage;
 
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -17,12 +20,12 @@ import com.wdk.baselibrary.viewmodel.BaseViewModel;
  * Description :
  *
  * @Author : wdk
- * @CreateTiem : 2020/9/22 4:39 PM
+ * @CreateTiem : 2020/10/29 10:50 AM
  * @LaseModify(最终修改人): wdk
- * @LastModityTime(最终修改时间): 2020/9/22 4:39 PM
+ * @LastModityTime(最终修改时间): 2020/10/29 10:50 AM
  * @LastCheckBy: wdk
  */
-public abstract class DataBindingActivity<T extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
     private ViewModelProvider mViewModelProvider;
     public T mBinding;
 
@@ -32,21 +35,20 @@ public abstract class DataBindingActivity<T extends ViewDataBinding> extends App
      */
     public MutableLiveData<Integer> loadingShowLiveData = new MutableLiveData<>();
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         initViewModel();
-        initDataBinding();
-        initLayout();
-        initLoadingListener();
-        initData();
+        initDataBinding(inflater, container, savedInstanceState);
+        return mBinding.getRoot();
     }
 
     protected abstract void initViewModel();
 
-    private void initDataBinding() {
+    private void initDataBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         DataBindingConfig dataBindingConfig = getDataBindingConfig();
-        mBinding = DataBindingUtil.setContentView(this, dataBindingConfig.getLayout());
+//        View root = inflater.inflate(dataBindingConfig.getLayout(), container, false);
+        mBinding = DataBindingUtil.inflate(inflater,dataBindingConfig.getLayout(),container,false);
         mBinding.setLifecycleOwner(this);
         SparseArray<Object> bindingParams = dataBindingConfig.getBindingParams();
         for (int i = 0, length = bindingParams.size(); i < length; i++) {
@@ -56,18 +58,13 @@ public abstract class DataBindingActivity<T extends ViewDataBinding> extends App
 
     protected abstract DataBindingConfig getDataBindingConfig();
 
-    public T getMBinding() {
-        return mBinding;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initData();
     }
 
-    /**
-     * 初始化布局，
-     */
-    public abstract void initLayout();
-
-    public abstract void initLoadingListener();
-
-    protected abstract void initData();
+    public abstract void initData();
 
     /**
      * 此方法给子类提供获取viewmodel的方法
@@ -77,7 +74,7 @@ public abstract class DataBindingActivity<T extends ViewDataBinding> extends App
      * @param <T>   创建的viewmodel
      * @return
      */
-    public <T extends BaseViewModel> T getActivityViewModel(@NonNull Class<T> clazz) {
+    public <T extends BaseViewModel> T getFragmentViewModel(@NonNull Class<T> clazz) {
         if (mViewModelProvider == null) {
             mViewModelProvider = new ViewModelProvider(this);
         }

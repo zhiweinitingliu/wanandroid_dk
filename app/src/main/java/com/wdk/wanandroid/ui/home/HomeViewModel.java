@@ -5,7 +5,10 @@ import com.wdk.baselibrary.network.CustomerCallBackListener;
 import com.wdk.baselibrary.network.NetMutableLiveData;
 import com.wdk.baselibrary.network.RequestData;
 import com.wdk.baselibrary.viewmodel.BaseViewModel;
-import com.wdk.wanandroid.data.bean.ArticleBean;
+import com.wdk.wanandroid.data.bean.home.ArticleBean;
+import com.wdk.wanandroid.data.bean.home.ArticleChildBean;
+import com.wdk.wanandroid.data.bean.home.BannerBean;
+import com.wdk.wanandroid.data.bean.home.BannerChildBean;
 
 import java.util.List;
 
@@ -22,16 +25,26 @@ public class HomeViewModel extends BaseViewModel {
 
     private HomeRepository homeRepository;
 
-    private NetMutableLiveData<List<ArticleBean.ArticleChildBean>> mArticleList;
+    private NetMutableLiveData<List<BannerChildBean>> bannerLiveData;
 
-    public HomeViewModel(){
+    //首页文章列表
+    private NetMutableLiveData<List<ArticleChildBean>> articleListLiveData;
+
+    public HomeViewModel() {
         homeRepository = new HomeRepository();
+
+        //首页轮播图
+        bannerLiveData = new NetMutableLiveData<>();
         //文章列表的
-        mArticleList = new NetMutableLiveData<>();
+        articleListLiveData = new NetMutableLiveData<>();
     }
 
-    public NetMutableLiveData<List<ArticleBean.ArticleChildBean>> getmArticleList() {
-        return mArticleList;
+    public NetMutableLiveData<List<ArticleChildBean>> getArticleListLiveData() {
+        return articleListLiveData;
+    }
+
+    public NetMutableLiveData<List<BannerChildBean>> getBannerLiveData() {
+        return bannerLiveData;
     }
 
     int current;
@@ -44,7 +57,7 @@ public class HomeViewModel extends BaseViewModel {
 
                     @Override
                     public void onSuccess(ArticleBean articleBean, ResultData<ArticleBean> resultData) {
-                        mArticleList.postValue(articleBean.getDatas());
+                        articleListLiveData.postValue(articleBean.getDatas());
                     }
 
                     @Override
@@ -54,6 +67,25 @@ public class HomeViewModel extends BaseViewModel {
                 });
 
         homeRepository.getArticleList(requestData);
+        current++;
+    }
+
+    public void getHomeBanner() {
+        RequestData<List<BannerChildBean>> requestData = getRequestData();
+        requestData.setShowLoading(true)
+                .addCallBackListener(new CustomerCallBackListener<List<BannerChildBean>>() {
+                    @Override
+                    public void onSuccess(List<BannerChildBean> bannerChildBeanList, ResultData<List<BannerChildBean>> resultData) {
+                        bannerLiveData.postValue(bannerChildBeanList);
+                    }
+
+                    @Override
+                    public void onFailed(ResultData<List<BannerChildBean>> resultData) {
+
+                    }
+                });
+
+        homeRepository.getHomeBanner(requestData);
         current++;
     }
 }

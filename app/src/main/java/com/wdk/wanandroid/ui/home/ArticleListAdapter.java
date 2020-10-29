@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import com.wdk.baselibrary.basepage.BaseBindingAdapter;
 import com.wdk.baselibrary.basepage.BaseViewHolder;
 import com.wdk.wanandroid.R;
-import com.wdk.wanandroid.data.bean.ArticleBean;
-import com.wdk.wanandroid.databinding.ItemArticleBinding;
+import com.wdk.wanandroid.data.bean.home.ArticleChildBean;
+import com.wdk.wanandroid.databinding.ItemHomeTypeArticleBinding;
 
 /**
  * Description :
@@ -20,7 +20,7 @@ import com.wdk.wanandroid.databinding.ItemArticleBinding;
  * @LastModityTime(最终修改时间): 2020/9/18 5:22 PM
  * @LastCheckBy: wdk
  */
-public class ArticleListAdapter extends BaseBindingAdapter<ItemArticleBinding, ArticleBean.ArticleChildBean, ArticleListAdapter.MyViewHolder> {
+public class ArticleListAdapter extends BaseBindingAdapter<ItemHomeTypeArticleBinding, ArticleChildBean, ArticleListAdapter.MyViewHolder> {
 
     public ArticleListAdapter(Context context) {
         super(context);
@@ -28,7 +28,7 @@ public class ArticleListAdapter extends BaseBindingAdapter<ItemArticleBinding, A
 
     @Override
     public int getLayoutId() {
-        return R.layout.item_article;
+        return R.layout.item_home_type_article;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ArticleListAdapter extends BaseBindingAdapter<ItemArticleBinding, A
     }
 
     @Override
-    public void onBindItem(ItemArticleBinding binding, ArticleBean.ArticleChildBean bean, int position) {
+    public void onBindItem(ItemHomeTypeArticleBinding binding,ArticleChildBean bean, int position) {
         binding.setArticleBean(bean);
     }
 

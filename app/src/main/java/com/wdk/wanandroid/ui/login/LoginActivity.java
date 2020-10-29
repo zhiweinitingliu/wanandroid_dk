@@ -57,6 +57,11 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitleName("登录");
