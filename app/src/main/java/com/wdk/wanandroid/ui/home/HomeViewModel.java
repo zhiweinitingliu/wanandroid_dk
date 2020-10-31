@@ -1,5 +1,6 @@
 package com.wdk.wanandroid.ui.home;
 
+import com.wdk.baselibrary.common.RefreshLoadMoreEnum;
 import com.wdk.baselibrary.data.bean.ResultData;
 import com.wdk.baselibrary.network.CustomerCallBackListener;
 import com.wdk.baselibrary.network.NetMutableLiveData;
@@ -28,7 +29,7 @@ public class HomeViewModel extends BaseViewModel {
     private NetMutableLiveData<List<BannerChildBean>> bannerLiveData;
 
     //首页文章列表
-    private NetMutableLiveData<List<ArticleChildBean>> articleListLiveData;
+    private NetMutableLiveData<ArticleBean> articleListLiveData;
 
     public HomeViewModel() {
         homeRepository = new HomeRepository();
@@ -39,7 +40,7 @@ public class HomeViewModel extends BaseViewModel {
         articleListLiveData = new NetMutableLiveData<>();
     }
 
-    public NetMutableLiveData<List<ArticleChildBean>> getArticleListLiveData() {
+    public NetMutableLiveData<ArticleBean> getArticleListLiveData() {
         return articleListLiveData;
     }
 
@@ -49,7 +50,11 @@ public class HomeViewModel extends BaseViewModel {
 
     int current;
 
-    public void getArticleList() {
+    public void getArticleList(RefreshLoadMoreEnum refreshLoadMoreEnum) {
+        if (refreshLoadMoreEnum == RefreshLoadMoreEnum.FIRST) {
+            current = 1;
+        }
+
         RequestData<ArticleBean> requestData = getRequestData();
         requestData.setShowLoading(true)
                 .addParams("page", current)
@@ -57,7 +62,7 @@ public class HomeViewModel extends BaseViewModel {
 
                     @Override
                     public void onSuccess(ArticleBean articleBean, ResultData<ArticleBean> resultData) {
-                        articleListLiveData.postValue(articleBean.getDatas());
+                        articleListLiveData.postValue(articleBean);
                     }
 
                     @Override

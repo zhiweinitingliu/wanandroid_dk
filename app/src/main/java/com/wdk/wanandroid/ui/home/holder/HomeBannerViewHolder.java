@@ -2,9 +2,11 @@ package com.wdk.wanandroid.ui.home.holder;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.ViewGroup;
 
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.wdk.baselibrary.utils.ScreenUtils;
 import com.wdk.wanandroid.R;
 import com.wdk.wanandroid.data.bean.home.BannerChildBean;
 import com.wdk.wanandroid.data.bean.home.HomeBannerBean;
@@ -38,10 +40,17 @@ public class HomeBannerViewHolder extends HomeBaseViewHolder<HomeBannerBean, Ite
     public HomeBannerViewHolder(Context context, ItemHomeTypeBannerBinding viewDataBinding) {
         super(context, viewDataBinding);
         imageResourceAdapter = new ImageResourceAdapter(0);
-        bannerViewPager=viewDataBinding.bannerViewPager;
+        bannerViewPager = viewDataBinding.bannerViewPager;
+
+        //动态设置轮播图的宽和高
+        int bannerHeight = (ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2px(context, 20)) * 717 / 1148;
+        ViewGroup.LayoutParams layoutParams = bannerViewPager.getLayoutParams();
+        layoutParams.height = bannerHeight;
+        bannerViewPager.setLayoutParams(layoutParams);
+
         bannerViewPager.setAutoPlay(true)
                 .setScrollDuration(600)
-                .setPageMargin(20)
+                .setPageMargin(ScreenUtils.dp2px(context, 10))
                 .setRevealWidth(BannerUtils.dp2px(0))
                 .setOffScreenPageLimit(2)
                 .setIndicatorStyle(IndicatorStyle.CIRCLE)
@@ -68,6 +77,8 @@ public class HomeBannerViewHolder extends HomeBaseViewHolder<HomeBannerBean, Ite
                     }
                 });
         bannerViewPager.removeDefaultPageTransformer();
+
+
     }
 
     HomeBannerBean homeBannerBean;

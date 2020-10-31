@@ -5,6 +5,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.wdk.baselibrary.basepage.BaseActivity;
 import com.wdk.baselibrary.basepage.DataBindingConfig;
 import com.wdk.wanandroid.BR;
@@ -33,6 +34,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     protected void initData() {
+        ImmersionBar.with(this).statusBarDarkFont(true).fitsSystemWindows(true).init();
         EventBus.getDefault().register(this);
         FragmentManager fragmentManager = getSupportFragmentManager();
         NavHostFragment navHostFragment = (NavHostFragment) fragmentManager.findFragmentById(R.id.nav_host_fragment);
