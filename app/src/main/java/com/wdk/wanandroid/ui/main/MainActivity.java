@@ -6,8 +6,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.gyf.immersionbar.ImmersionBar;
-import com.wdk.baselibrary.basepage.BaseActivity;
-import com.wdk.baselibrary.basepage.DataBindingConfig;
+import com.wdk.component_base.basepage.BaseActivity;
+import com.wdk.component_base.basepage.DataBindingConfig;
 import com.wdk.wanandroid.BR;
 import com.wdk.wanandroid.R;
 import com.wdk.wanandroid.constances.MessageEvent;

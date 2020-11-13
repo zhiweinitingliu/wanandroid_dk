@@ -1,17 +1,10 @@
 package com.wdk.wanandroid.data.repository;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.wdk.baselibrary.data.bean.ResultData;
-import com.wdk.baselibrary.data.repository.BaseRepository;
-import com.wdk.baselibrary.network.NetMutableLiveData;
-import com.wdk.baselibrary.network.NetWorkCallBackListener;
-import com.wdk.baselibrary.network.NetWorkManager;
-import com.wdk.baselibrary.network.RequestData;
-import com.wdk.baselibrary.utils.SharedPreferencesUtil;
+import com.wdk.component_base.data.bean.ResultData;
+import com.wdk.component_base.data.repository.BaseRepository;
+import com.wdk.component_base.network.NetWorkManager;
+import com.wdk.component_base.network.RequestData;
 import com.wdk.wanandroid.api.AccountService;
-import com.wdk.wanandroid.constances.Constants;
 import com.wdk.wanandroid.data.bean.LoginResponseBean;
 import com.wdk.wanandroid.data.bean.RegisterResponseBean;
 

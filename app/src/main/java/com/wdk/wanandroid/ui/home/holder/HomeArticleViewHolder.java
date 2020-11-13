@@ -5,12 +5,11 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.wdk.baselibrary.utils.StringUtils;
-import com.wdk.baselibrary.utils.TimeUtil;
+import com.wdk.component_base.utils.StringUtils;
+import com.wdk.component_base.utils.TimeUtil;
 import com.wdk.wanandroid.data.bean.home.HomeArticleBean;
 import com.wdk.wanandroid.databinding.ItemHomeTypeArticleBinding;
 import com.wdk.wanandroid.ui.home.HomeAdapter;
-import com.wdk.wanandroid.ui.home.HomeHelper;
 
 /**
  * Description :

@@ -3,7 +3,7 @@ package com.wdk.wanandroid.utils;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
-import com.wdk.baselibrary.utils.SharedPreferencesUtil;
+import com.wdk.component_base.utils.SharedPreferencesUtil;
 import com.wdk.wanandroid.constances.Constants;
 import com.wdk.wanandroid.data.bean.LoginResponseBean;
 

@@ -3,11 +3,11 @@ package com.wdk.wanandroid.viewmodels;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
-import com.wdk.baselibrary.data.bean.ResultData;
-import com.wdk.baselibrary.network.CustomerCallBackListener;
-import com.wdk.baselibrary.network.NetMutableLiveData;
-import com.wdk.baselibrary.network.RequestData;
-import com.wdk.baselibrary.viewmodel.BaseViewModel;
+import com.wdk.component_base.data.bean.ResultData;
+import com.wdk.component_base.network.CustomerCallBackListener;
+import com.wdk.component_base.network.NetMutableLiveData;
+import com.wdk.component_base.network.RequestData;
+import com.wdk.component_base.viewmodel.BaseViewModel;
 import com.wdk.wanandroid.constances.MessageEvent;
 import com.wdk.wanandroid.data.bean.LoginResponseBean;
 import com.wdk.wanandroid.data.bean.RegisterResponseBean;

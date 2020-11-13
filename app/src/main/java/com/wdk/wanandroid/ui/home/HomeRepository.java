@@ -1,27 +1,17 @@
 package com.wdk.wanandroid.ui.home;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.wdk.baselibrary.data.bean.ResultData;
-import com.wdk.baselibrary.utils.SharedPreferencesUtil;
+import com.wdk.component_base.data.bean.ResultData;
 import com.wdk.wanandroid.api.HomeArticleService;
 import com.wdk.wanandroid.api.HomeService;
-import com.wdk.wanandroid.constances.Constants;
 import com.wdk.wanandroid.data.bean.home.ArticleBean;
-import com.wdk.baselibrary.network.NetMutableLiveData;
-import com.wdk.baselibrary.network.NetWorkCallBackListener;
-import com.wdk.baselibrary.network.NetWorkManager;
-import com.wdk.baselibrary.network.RequestData;
-import com.wdk.baselibrary.data.repository.BaseRepository;
-import com.wdk.wanandroid.data.bean.RegisterResponseBean;
-import com.wdk.wanandroid.data.bean.home.BannerBean;
+import com.wdk.component_base.network.NetWorkManager;
+import com.wdk.component_base.network.RequestData;
+import com.wdk.component_base.data.repository.BaseRepository;
 import com.wdk.wanandroid.data.bean.home.BannerChildBean;
 
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Observable;
-import okhttp3.ResponseBody;
 
 /**
  * Description : 获取数据的仓库，用于给viewmodel提供数据

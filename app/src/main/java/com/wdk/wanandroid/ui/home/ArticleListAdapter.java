@@ -5,8 +5,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.wdk.baselibrary.basepage.BaseBindingAdapter;
-import com.wdk.baselibrary.basepage.BaseViewHolder;
+import com.wdk.component_base.basepage.BaseBindingAdapter;
+import com.wdk.component_base.basepage.BaseViewHolder;
 import com.wdk.wanandroid.R;
 import com.wdk.wanandroid.data.bean.home.ArticleChildBean;
 import com.wdk.wanandroid.databinding.ItemHomeTypeArticleBinding;

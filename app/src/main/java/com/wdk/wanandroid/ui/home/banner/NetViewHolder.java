@@ -4,7 +4,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.wdk.baselibrary.utils.LoadImage;
+import com.wdk.component_base.utils.LoadImage;
 import com.wdk.wanandroid.R;
 import com.wdk.wanandroid.data.bean.home.BannerChildBean;
 import com.wdk.wanandroid.ui.AppApplication;

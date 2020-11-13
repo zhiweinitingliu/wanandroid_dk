@@ -1,10 +1,6 @@
 package com.wdk.wanandroid.data.bean.home;
 
-import com.wdk.baselibrary.data.bean.BaseBean;
 import com.wdk.wanandroid.data.bean.ListBaseBean;
-import com.wdk.wanandroid.data.bean.home.ArticleChildBean;
-
-import java.util.List;
 
 /**
  * Description :

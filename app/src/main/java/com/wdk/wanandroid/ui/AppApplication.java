@@ -11,7 +11,7 @@ import com.scwang.smart.refresh.layout.api.RefreshHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
-import com.wdk.baselibrary.basepage.AppInitUtil;
+import com.wdk.component_base.basepage.AppInitUtil;
 import com.wdk.wanandroid.R;
 
 /**

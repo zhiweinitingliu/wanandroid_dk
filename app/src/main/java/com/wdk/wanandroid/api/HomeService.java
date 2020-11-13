@@ -1,15 +1,12 @@
 package com.wdk.wanandroid.api;
 
-import com.wdk.baselibrary.data.bean.ResultData;
-import com.wdk.wanandroid.data.bean.home.ArticleBean;
-import com.wdk.wanandroid.data.bean.home.BannerBean;
+import com.wdk.component_base.data.bean.ResultData;
 import com.wdk.wanandroid.data.bean.home.BannerChildBean;
 
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 /**
  * Description :

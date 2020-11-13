@@ -10,8 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 
-import com.wdk.baselibrary.basepage.BaseActivity;
-import com.wdk.baselibrary.basepage.DataBindingConfig;
+import com.wdk.component_base.basepage.BaseActivity;
+import com.wdk.component_base.basepage.DataBindingConfig;
 import com.wdk.wanandroid.BR;
 import com.wdk.wanandroid.R;
 import com.wdk.wanandroid.databinding.ActivityLoginBinding;

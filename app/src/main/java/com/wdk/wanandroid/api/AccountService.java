@@ -1,16 +1,13 @@
 package com.wdk.wanandroid.api;
 
-import com.wdk.baselibrary.data.bean.ResultData;
+import com.wdk.component_base.data.bean.ResultData;
 import com.wdk.wanandroid.data.bean.LoginResponseBean;
 import com.wdk.wanandroid.data.bean.RegisterResponseBean;
 
 import io.reactivex.rxjava3.core.Observable;
-import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 
 /**
  * Description :

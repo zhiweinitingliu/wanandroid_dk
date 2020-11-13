@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.wdk.baselibrary.utils.ScreenUtils;
+import com.wdk.component_base.utils.ScreenUtils;
 import com.wdk.wanandroid.R;
 import com.wdk.wanandroid.data.bean.home.BannerChildBean;
 import com.wdk.wanandroid.data.bean.home.HomeBannerBean;

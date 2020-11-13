@@ -6,10 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
-import com.scwang.smart.refresh.layout.util.SmartUtil;
-import com.wdk.baselibrary.basepage.BaseFragment;
-import com.wdk.baselibrary.basepage.DataBindingConfig;
-import com.wdk.baselibrary.common.RefreshLoadMoreEnum;
+import com.wdk.component_base.basepage.BaseFragment;
+import com.wdk.component_base.basepage.DataBindingConfig;
+import com.wdk.component_base.common.RefreshLoadMoreEnum;
 import com.wdk.wanandroid.BR;
 import com.wdk.wanandroid.R;
 import com.wdk.wanandroid.data.bean.home.ArticleBean;

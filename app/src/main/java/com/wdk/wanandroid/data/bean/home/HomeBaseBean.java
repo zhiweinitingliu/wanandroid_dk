@@ -1,6 +1,6 @@
 package com.wdk.wanandroid.data.bean.home;
 
-import com.wdk.baselibrary.data.bean.BaseBean;
+import com.wdk.component_base.data.bean.BaseBean;
 import com.wdk.wanandroid.ui.home.HomeTypeFactory;
 
 /**

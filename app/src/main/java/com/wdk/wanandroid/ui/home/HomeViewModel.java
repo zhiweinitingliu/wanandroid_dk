@@ -1,14 +1,12 @@
 package com.wdk.wanandroid.ui.home;
 
-import com.wdk.baselibrary.common.RefreshLoadMoreEnum;
-import com.wdk.baselibrary.data.bean.ResultData;
-import com.wdk.baselibrary.network.CustomerCallBackListener;
-import com.wdk.baselibrary.network.NetMutableLiveData;
-import com.wdk.baselibrary.network.RequestData;
-import com.wdk.baselibrary.viewmodel.BaseViewModel;
+import com.wdk.component_base.common.RefreshLoadMoreEnum;
+import com.wdk.component_base.data.bean.ResultData;
+import com.wdk.component_base.network.CustomerCallBackListener;
+import com.wdk.component_base.network.NetMutableLiveData;
+import com.wdk.component_base.network.RequestData;
+import com.wdk.component_base.viewmodel.BaseViewModel;
 import com.wdk.wanandroid.data.bean.home.ArticleBean;
-import com.wdk.wanandroid.data.bean.home.ArticleChildBean;
-import com.wdk.wanandroid.data.bean.home.BannerBean;
 import com.wdk.wanandroid.data.bean.home.BannerChildBean;
 
 import java.util.List;

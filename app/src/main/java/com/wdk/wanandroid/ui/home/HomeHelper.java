@@ -1,8 +1,5 @@
 package com.wdk.wanandroid.ui.home;
 
-import com.wdk.baselibrary.utils.StringUtils;
-import com.wdk.baselibrary.utils.TimeUtil;
-
 /**
  * Description :
  *
