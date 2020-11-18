@@ -2,13 +2,12 @@ package com.wdk.component_base.network;
 
 import android.text.TextUtils;
 
-import com.wdk.component_base.common.CodeEnum;
 import com.wdk.component_base.data.bean.ResultData;
 import com.wdk.component_base.utils.CustomerToast;
 import com.wdk.component_base.viewmodel.BaseViewModel;
 
-import static com.wdk.component_base.common.CodeEnum.code_0;
-import static com.wdk.component_base.common.CodeEnum.code_cut_1;
+import static com.wdk.component_base.network.CodeEnum.code_0;
+import static com.wdk.component_base.network.CodeEnum.code_cut_1;
 
 /**
  * Description :

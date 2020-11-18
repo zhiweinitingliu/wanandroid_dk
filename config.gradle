@@ -1,0 +1,84 @@
+/**
+ * 全局统一配置
+ */
+ext {
+
+    /**
+     * module开关统一声明在此处
+     * true：module作为application，可单独打包为apk
+     * false：module作为library，可作为宿主application的组件
+     */
+    isModule = false
+
+    versions = [
+            applicationId                : "com.hailong.amd",        //应用ID
+            versionCode                  : 1,                    //版本号
+            versionName                  : "1.0.0",              //版本名称
+
+            buildToolsVersion            : "29.0.3",
+            compileSdkVersion            : 29,
+            minSdkVersion                : 21,
+            targetSdkVersion             : 29,
+
+            //依赖包的版本号
+            appcompatVersion             : "1.2.0",
+            constraintlayoutVersion      : "2.0.4",
+            junitVersion                 : "4.12",
+            materialVersion              : "1.2.1",
+            navigationFragmentVersion    : "2.3.1",
+            navigationUiVersion          : "2.3.1",
+            lifecycleExtensionsVersion   : "2.2.0",
+            lifecycleViewmodelVersion    : "2.2.0",
+            retrofitlVersion             : "2.9.0",
+            adapterRxjava3Version        : "2.9.0",
+            okhttpVersion                : "4.9.0",
+            rxjavaVersion                : "3.0.6",
+            rxandroidVersion             : "3.0.0",
+            loggerVersion                : "2.2.0",
+            recyclerviewVersion          : "1.1.0",
+            fastjsonVersion              : "1.2.73",
+            eventbusVersion              : "3.2.0",
+            gsonVersion                  : "2.8.6",
+            BannerViewPagerVersion       : "3.2.0",
+            glideVersion                 : "4.11.0",
+            immersionbarVersion          : "3.0.0",
+            immersionbarComponentsVersion: "3.0.0",
+            refreshLayoutKernelVersion: "2.0.1",
+            refreshHeaderClassicsVersion: "2.0.1",
+            refreshFooterClassicsVersion: "2.0.1",
+            recyclerviewXVersion: "1.3.2",
+    ]
+
+    dependencies = [
+            "appcompat"              : "androidx.appcompat:appcompat:${versions["appcompatVersion"]}",
+            "constraintlayout"       : "androidx.constraintlayout:constraintlayout:${versions["constraintlayoutVersion"]}",
+            "junit"                  : "junit:junit:${versions["junitVersion"]}",
+            "material"               : "com.google.android.material:material:${versions["materialVersion"]}",
+            "navigation_fragment"    : "androidx.navigation:navigation-fragment:${versions["navigationFragmentVersion"]}",
+            "navigation_ui"          : "androidx.navigation:navigation-ui:${versions["navigationUiVersion"]}",
+            "lifecycle_extensions"   : "androidx.lifecycle:lifecycle-extensions:${versions["lifecycleExtensionsVersion"]}",
+            "lifecycle_viewmodel"    : "androidx.lifecycle:lifecycle-viewmodel:${versions["lifecycleViewmodelVersion"]}",
+            "retrofit"               : "com.squareup.retrofit2:retrofit:${versions["retrofitlVersion"]}",
+            "adapter_rxjava3"        : "com.squareup.retrofit2:adapter-rxjava3:${versions["adapterRxjava3Version"]}",
+            "okhttp"                 : "com.squareup.okhttp3:okhttp:${versions["okhttpVersion"]}",
+            "rxjava"                 : "io.reactivex.rxjava3:rxjava:${versions["rxjavaVersion"]}",
+            "rxandroid"              : "io.reactivex.rxjava3:rxandroid:${versions["rxandroidVersion"]}",
+            "logger"                 : "com.orhanobut:logger:${versions["loggerVersion"]}",
+            "recyclerview"           : "androidx.recyclerview:recyclerview:${versions["recyclerviewVersion"]}",
+            "fastjson"               : "com.alibaba:fastjson:${versions["fastjsonVersion"]}",
+            "eventbus"               : "org.greenrobot:eventbus:${versions["eventbusVersion"]}",
+            "gson"                   : "com.google.code.gson:gson:${versions["gsonVersion"]}",
+            "BannerViewPager"        : "com.github.zhpanvip:BannerViewPager:${versions["BannerViewPagerVersion"]}",
+            "glide"                  : "com.github.bumptech.glide:glide:${versions["glideVersion"]}",
+            //状态栏工具
+            "immersionbar"           : "com.gyf.immersionbar:immersionbar:${versions["immersionbarVersion"]}",
+            "immersionbar_components": "com.gyf.immersionbar:immersionbar-components:${versions["immersionbarComponentsVersion"]}",
+            //刷新
+            "refresh_layout_kernel": "com.scwang.smart:refresh-layout-kernel:${versions["refreshLayoutKernelVersion"]}",
+            "refresh_header_classics": "com.scwang.smart:refresh-header-classics:${versions["refreshHeaderClassicsVersion"]}",
+            "refresh_footer_classics": "com.scwang.smart:refresh-footer-classics:${versions["refreshFooterClassicsVersion"]}",
+            //RecyclerView的封装库
+            "recyclerview_x": "com.yanzhenjie.recyclerview:x:${versions["recyclerviewXVersion"]}",
+    ]
+
+}

@@ -1,4 +1,4 @@
-package com.wdk.component_base.common;
+package com.wdk.component_base.network;
 
 /**
  * Description :
