@@ -75,7 +75,6 @@ dependencies {
 
     //RecyclerView的封装库
     api rootProject.ext.dependencies["recyclerview_x"]
-
-//    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api rootProject.ext.dependencies["arouter"]
 
 }

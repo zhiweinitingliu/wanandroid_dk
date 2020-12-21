@@ -3,6 +3,7 @@ package com.wdk.wanandroid.ui;
 import android.app.Application;
 import android.content.Context;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -13,6 +14,7 @@ import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 import com.wdk.component_base.basepage.AppInitUtil;
 import com.wdk.wanandroid.R;
+import com.wdk.wanandroid.BuildConfig;
 
 /**
  * Description :
@@ -56,5 +58,10 @@ public class AppApplication extends Application {
         super.onCreate();
         application=this;
         AppInitUtil.getInstance().init(this);
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(application);
     }
 }
