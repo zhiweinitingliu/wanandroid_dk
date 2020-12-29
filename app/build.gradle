@@ -37,7 +37,15 @@ dependencies {
 //    implementation 'androidx.appcompat:appcompat:1.2.0'
 //    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 //    testImplementation 'junit:junit:4.12'
+
+
     implementation project(path: ':x_component_base')
+    //如果各组件是独立的就引入base库
+    if (!isModule.toBoolean()) {
+        implementation project(path: ':m_module_home')
+        implementation project(path: ':m_module_mine')
+    }
+
 //
     //mvvm相关依赖
 //    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
@@ -53,8 +61,6 @@ dependencies {
 //    //RecyclerView
 //    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 //    implementation 'com.alibaba:fastjson:1.2.73'
-
-
 
 
 }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.wdk.wanandroid.ui.home.HomeFragment"
+        android:name="com.wdk.home.ui.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_mine"
-        android:name="com.wdk.wanandroid.ui.mine.MineFragment"
+        android:name="com.wdk.mine.ui.mine.MineFragment"
         android:label="@string/title_mine"
         tools:layout="@layout/fragment_mine" />
 

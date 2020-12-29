@@ -4,14 +4,16 @@
 ext {
 
     /**
-     * module开关统一声明在此处
-     * true：module作为application，可单独打包为apk
-     * false：module作为library，可作为宿主application的组件
+     * module开关统一声明在此处 默认是module，作为library
+     * true：module作为library，可作为宿主application的组件
+     * false：module作为application，可单独打包为apk
      */
-    isModule = false
+    isHomeModule = true
+    isMineModule = true
+
 
     versions = [
-            applicationId                : "com.hailong.amd",        //应用ID
+            applicationId                : "com.wdk.wanandroid",        //应用ID
             versionCode                  : 1,                    //版本号
             versionName                  : "1.0.0",              //版本名称
 
@@ -43,10 +45,10 @@ ext {
             glideVersion                 : "4.11.0",
             immersionbarVersion          : "3.0.0",
             immersionbarComponentsVersion: "3.0.0",
-            refreshLayoutKernelVersion: "2.0.1",
-            refreshHeaderClassicsVersion: "2.0.1",
-            refreshFooterClassicsVersion: "2.0.1",
-            recyclerviewXVersion: "1.3.2",
+            refreshLayoutKernelVersion   : "2.0.1",
+            refreshHeaderClassicsVersion : "2.0.1",
+            refreshFooterClassicsVersion : "2.0.1",
+            recyclerviewXVersion         : "1.3.2",
             arouterVersion               : "1.5.1"
     ]
 
@@ -75,11 +77,11 @@ ext {
             "immersionbar"           : "com.gyf.immersionbar:immersionbar:${versions["immersionbarVersion"]}",
             "immersionbar_components": "com.gyf.immersionbar:immersionbar-components:${versions["immersionbarComponentsVersion"]}",
             //刷新
-            "refresh_layout_kernel": "com.scwang.smart:refresh-layout-kernel:${versions["refreshLayoutKernelVersion"]}",
+            "refresh_layout_kernel"  : "com.scwang.smart:refresh-layout-kernel:${versions["refreshLayoutKernelVersion"]}",
             "refresh_header_classics": "com.scwang.smart:refresh-header-classics:${versions["refreshHeaderClassicsVersion"]}",
             "refresh_footer_classics": "com.scwang.smart:refresh-footer-classics:${versions["refreshFooterClassicsVersion"]}",
             //RecyclerView的封装库
-            "recyclerview_x": "com.yanzhenjie.recyclerview:x:${versions["recyclerviewXVersion"]}",
+            "recyclerview_x"         : "com.yanzhenjie.recyclerview:x:${versions["recyclerviewXVersion"]}",
             "arouter"                : "com.alibaba:arouter-api:${versions["arouterVersion"]}"
     ]
 
