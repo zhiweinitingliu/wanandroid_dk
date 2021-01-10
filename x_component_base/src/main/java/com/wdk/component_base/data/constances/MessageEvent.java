@@ -11,6 +11,7 @@ package com.wdk.component_base.data.constances;
  */
 public class MessageEvent {
     public static final String login_success = "login_success";
+    public static final String login_out = "login_out";
 
 
     private String message;

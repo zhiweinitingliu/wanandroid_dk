@@ -1,7 +1,7 @@
-if (Boolean.valueOf(rootProject.ext.isMineModule)) {
-    apply plugin: 'com.android.library'
-} else {
+if (isModule.toBoolean()) {
     apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
 }
 
 android {
@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        if (!Boolean.valueOf(rootProject.ext.isMineModule)) {
+        if (isModule.toBoolean()) {
             applicationId "com.wdk.b_module_mine"
         }
 
@@ -35,7 +35,7 @@ android {
      * */
     sourceSets {
         main {
-            if (Boolean.valueOf(rootProject.ext.isMineModule)) {//apk
+            if (isModule.toBoolean()) {//apk
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'

@@ -3,15 +3,6 @@
  */
 ext {
 
-    /**
-     * module开关统一声明在此处 默认是module，作为library
-     * true：module作为library，可作为宿主application的组件
-     * false：module作为application，可单独打包为apk
-     */
-    isHomeModule = true
-    isMineModule = true
-
-
     versions = [
             applicationId                : "com.wdk.wanandroid",        //应用ID
             versionCode                  : 1,                    //版本号

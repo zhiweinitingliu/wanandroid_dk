@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="accountViewModel"
-            type="com.wdk.mine.viewmodels.AccountViewModel" />
+            name="registerViewModel"
+            type="com.wdk.mine.ui.register.RegisterViewModel" />
 
     </data>
 
@@ -127,7 +127,7 @@
             android:layout_marginRight="25dp"
             android:background="@drawable/shape_login_login_btn"
             android:onClick="toRegister"
-            android:text='@{accountViewModel.isLoading?"请稍等...":"注册",default="注册"}'
+            android:text='@{registerViewModel.isLoading?"请稍等...":"注册",default="注册"}'
             android:textColor="@color/colorFFFFFF"
             android:textSize="18dp" />
 

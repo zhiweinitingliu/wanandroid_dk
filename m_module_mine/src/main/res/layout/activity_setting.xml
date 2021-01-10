@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="settingViewModel"
+            type="com.wdk.mine.ui.setting.SettingViewModel" />
+
+        <variable
+            name="myHandlers"
+            type="com.wdk.mine.ui.setting.SettingActivity.MyHandlers" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlLoginOut"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/colorFFFFFF"
+            android:onClick="@{myHandlers::onLoginOutClick}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="退出登录"
+                android:textColor="@color/color666666"
+                android:textSize="14dp"
+                android:visibility="@{settingViewModel.userBeanMutableLiveData.login? View.GONE : View.VISIBLE}" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</layout>

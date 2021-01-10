@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.library.baseAdapters.BR;
 
 import com.wdk.component_base.utils.StringUtils;
 import com.wdk.component_base.utils.TimeUtil;
@@ -34,10 +35,13 @@ public class HomeArticleViewHolder extends HomeBaseViewHolder<HomeArticleBean, I
             homeArticleBean.getArticleChildBean().setMyShareUser(getUser("分享人：", homeArticleBean.getArticleChildBean().getShareUser()));
         } else {
             homeArticleBean.getArticleChildBean().setMyShareUser("");
+            homeArticleBean.getArticleChildBean().setMyShareUser("");
         }
 
         homeArticleBean.getArticleChildBean().setPublishTimeStr(getPublishTime(homeArticleBean.getArticleChildBean().getPublishTime()));
-        viewDataBinding.setArticleBean(homeArticleBean.getArticleChildBean());
+//        viewDataBinding.setArticleBean(homeArticleBean.getArticleChildBean());
+        viewDataBinding.setVariable(BR.articleBean, homeArticleBean.getArticleChildBean());
+        viewDataBinding.executePendingBindings();
     }
 
     public static String getUser(String title, String user) {

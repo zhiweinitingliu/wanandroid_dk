@@ -2,7 +2,6 @@ package com.wdk.mine.api;
 
 import com.wdk.component_base.data.bean.ResultData;
 import com.wdk.mine.data.bean.LoginResponseBean;
-import com.wdk.mine.data.bean.RegisterResponseBean;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Field;
@@ -31,5 +30,5 @@ public interface AccountService {
     //注册
     @FormUrlEncoded
     @POST("user/register")
-    Observable<ResultData<RegisterResponseBean>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+    Observable<ResultData<LoginResponseBean>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
 }

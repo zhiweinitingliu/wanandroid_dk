@@ -1,13 +1,15 @@
 package com.wdk.home.ui;
 
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
 import com.wdk.component_base.common.RefreshLoadMoreEnum;
-import com.wdk.component_base.data.bean.ResultData;
-import com.wdk.component_base.network.CustomerCallBackListener;
 import com.wdk.component_base.network.NetMutableLiveData;
 import com.wdk.component_base.network.RequestData;
 import com.wdk.component_base.viewmodel.BaseViewModel;
 import com.wdk.home.bean.home.ArticleBean;
 import com.wdk.home.bean.home.BannerChildBean;
+import com.wdk.home.bean.home.HomeBaseBean;
 
 import java.util.List;
 
@@ -23,72 +25,44 @@ import java.util.List;
 public class HomeViewModel extends BaseViewModel {
 
     private HomeRepository homeRepository;
+    private NetMutableLiveData<List<HomeBaseBean>> homeBeanListLiveData;
 
-    private NetMutableLiveData<List<BannerChildBean>> bannerLiveData;
-
-    //首页文章列表
-    private NetMutableLiveData<ArticleBean> articleListLiveData;
+    public NetMutableLiveData<List<HomeBaseBean>> getHomeBeanListLiveData() {
+        return homeBeanListLiveData;
+    }
 
     public HomeViewModel() {
         homeRepository = new HomeRepository();
-
-        //首页轮播图
-        bannerLiveData = new NetMutableLiveData<>();
-        //文章列表的
-        articleListLiveData = new NetMutableLiveData<>();
+        homeBeanListLiveData = new NetMutableLiveData<>();
     }
-
-    public NetMutableLiveData<ArticleBean> getArticleListLiveData() {
-        return articleListLiveData;
-    }
-
-    public NetMutableLiveData<List<BannerChildBean>> getBannerLiveData() {
-        return bannerLiveData;
-    }
-
-    int current;
 
     public void getArticleList(RefreshLoadMoreEnum refreshLoadMoreEnum) {
-        if (refreshLoadMoreEnum == RefreshLoadMoreEnum.FIRST) {
-            current = 1;
-        }
-
         RequestData<ArticleBean> requestData = getRequestData();
-        requestData.setShowLoading(true)
-                .addParams("page", current)
-                .addCallBackListener(new CustomerCallBackListener<ArticleBean>() {
-
-                    @Override
-                    public void onSuccess(ArticleBean articleBean, ResultData<ArticleBean> resultData) {
-                        articleListLiveData.postValue(articleBean);
-                    }
-
-                    @Override
-                    public void onFailed(ResultData<ArticleBean> resultData) {
-
-                    }
-                });
-
-        homeRepository.getArticleList(requestData);
-        current++;
+        homeRepository.getArticleList(requestData, homeBeanListLiveData, refreshLoadMoreEnum);
     }
 
     public void getHomeBanner() {
+        MutableLiveData<Boolean> requestListener = new MutableLiveData<>();
+        requestListener.observeForever(new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    getArticleList(RefreshLoadMoreEnum.FIRST);
+                }
+            }
+        });
+
         RequestData<List<BannerChildBean>> requestData = getRequestData();
-        requestData.setShowLoading(true)
-                .addCallBackListener(new CustomerCallBackListener<List<BannerChildBean>>() {
-                    @Override
-                    public void onSuccess(List<BannerChildBean> bannerChildBeanList, ResultData<List<BannerChildBean>> resultData) {
-                        bannerLiveData.postValue(bannerChildBeanList);
-                    }
+        homeRepository.getHomeBanner(requestData, homeBeanListLiveData, requestListener);
+        homeRepository.hasMore = true;
+    }
 
-                    @Override
-                    public void onFailed(ResultData<List<BannerChildBean>> resultData) {
-
-                    }
-                });
-
-        homeRepository.getHomeBanner(requestData);
-        current++;
+    /**
+     * 是否还有下一页
+     *
+     * @return
+     */
+    public boolean hasMore() {
+        return homeRepository.hasMore;
     }
 }

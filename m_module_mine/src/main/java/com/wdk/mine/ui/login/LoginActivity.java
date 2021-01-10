@@ -3,20 +3,22 @@ package com.wdk.mine.ui.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
 
 import com.wdk.component_base.basepage.BaseActivity;
 import com.wdk.component_base.basepage.DataBindingConfig;
+import com.wdk.component_base.data.constances.MessageEvent;
 import com.wdk.mine.BR;
 import com.wdk.mine.R;
 import com.wdk.mine.databinding.ActivityLoginBinding;
 import com.wdk.mine.ui.register.RegisterActivity;
-import com.wdk.mine.viewmodels.AccountViewModel;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 
 /**
@@ -31,34 +33,23 @@ import com.wdk.mine.viewmodels.AccountViewModel;
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
     private static final String TAG = "LoginActivity";
 
-    private AccountViewModel accountViewModel;
+    private LoginViewModel loginViewModel;
 
     @Override
     protected void initViewModel() {
-        accountViewModel = getActivityViewModel(AccountViewModel.class);
-        accountViewModel.getLoginResultLiveData().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                Log.e(TAG, "onChanged: " + aBoolean);
-                //登录成功
-                if (aBoolean) {
-                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-            }
-        });
+        loginViewModel = getActivityViewModel(LoginViewModel.class);
     }
 
     @Override
     protected DataBindingConfig getDataBindingConfig() {
         DataBindingConfig dataBindingConfig = new DataBindingConfig(R.layout.activity_login);
-        dataBindingConfig.addBindingParam(BR.accountViewModel, accountViewModel);
+        dataBindingConfig.addBindingParam(BR.accountViewModel, loginViewModel);
         return dataBindingConfig;
     }
 
     @Override
     protected void initData() {
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -84,7 +75,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
             return;
         }
 
-        accountViewModel.doLogin(userName, password);
+        loginViewModel.doLogin(userName, password);
     }
 
     /**
@@ -93,6 +84,21 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
     public void goRegister(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-        finish();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        switch (event.getMessage()) {
+            //登录成功
+            case MessageEvent.login_success:
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

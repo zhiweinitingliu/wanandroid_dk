@@ -5,15 +5,18 @@ import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
 
 import com.wdk.component_base.basepage.BaseActivity;
 import com.wdk.component_base.basepage.DataBindingConfig;
+import com.wdk.component_base.data.constances.MessageEvent;
 import com.wdk.component_base.utils.CustomerToast;
 import com.wdk.mine.BR;
 import com.wdk.mine.R;
 import com.wdk.mine.databinding.ActivityRegisterBinding;
-import com.wdk.mine.viewmodels.AccountViewModel;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Description :
@@ -26,44 +29,35 @@ import com.wdk.mine.viewmodels.AccountViewModel;
  */
 public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> {
 
-    private AccountViewModel accountViewModel;
+    private RegisterViewModel registerViewModel;
 
     @Override
     protected void initViewModel() {
-        accountViewModel = getActivityViewModel(AccountViewModel.class);
+        registerViewModel = getActivityViewModel(RegisterViewModel.class);
     }
 
     @Override
     protected DataBindingConfig getDataBindingConfig() {
         DataBindingConfig dataBindingConfig = new DataBindingConfig(R.layout.activity_register);
-        dataBindingConfig.addBindingParam(BR.accountViewModel, accountViewModel);
+        dataBindingConfig.addBindingParam(BR.accountViewModel, registerViewModel);
         return dataBindingConfig;
     }
 
     @Override
     protected void initData() {
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitleName("注册");
-        accountViewModel.getRegisterResultLiveData().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    finish();
-                }
-            }
-        });
     }
 
     /**
      * 去注册
      */
     public void toRegister(View view) {
-
         String userName = getMBinding().etUserName.getText().toString();
         String password = getMBinding().etPassword.getText().toString();
         String rePassword = getMBinding().etRePassword.getText().toString();
@@ -83,9 +77,24 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> {
             return;
         }
 
-        accountViewModel.doRegister(userName, password, rePassword);
+        registerViewModel.doRegister(userName, password, rePassword);
         showLoading();
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        switch (event.getMessage()) {
+            //登录成功
+            case MessageEvent.login_success:
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

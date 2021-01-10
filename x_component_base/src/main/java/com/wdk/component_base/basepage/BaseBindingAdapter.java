@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ViewDataBinding;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.wdk.component_base.data.bean.BaseBean;
 
@@ -24,21 +22,18 @@ import java.util.List;
  * @LastModityTime(最终修改时间): 2020/9/19 3:46 PM
  * @LastCheckBy: wdk
  */
-public abstract class BaseBindingAdapter<VB extends ViewDataBinding, M extends BaseBean, VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class BaseBindingAdapter<VB extends ViewDataBinding, M extends BaseBean, VH extends BaseViewHolder> extends BaseRecyclerViewAdapter<M, VH> {
 
-    public Context context;
-    protected ObservableArrayList<M> items;
 
     public BaseBindingAdapter(Context context) {
-        this.context = context;
-        items = new ObservableArrayList<>();
+        super(context);
     }
 
     public abstract int getLayoutId();
 
     @Override
     public int getItemCount() {
-        return items == null ? 0 : items.size();
+        return getData() == null ? 0 : getData().size();
     }
 
     @NonNull
@@ -57,14 +52,11 @@ public abstract class BaseBindingAdapter<VB extends ViewDataBinding, M extends B
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        M bean = items.get(position);
+        M bean = getData().get(position);
         VB binding = DataBindingUtil.getBinding(holder.itemView);
         onBindItem(binding, bean, position);
     }
 
     public abstract void onBindItem(VB binding, M bean, int position);
 
-    public ObservableArrayList<M> getItems() {
-        return items;
-    }
 }

@@ -2,10 +2,13 @@ package com.wdk.mine.utils;
 
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
-import com.wdk.component_base.data.constances.Constants;
+import com.wdk.component_base.data.user.UserInfoProvider;
+import com.wdk.component_base.utils.JsonUtil;
 import com.wdk.component_base.utils.SharedPreferencesUtil;
 import com.wdk.mine.data.bean.LoginResponseBean;
+import com.wdk.mine.data.constances.ConstantsUser;
 
 
 /**
@@ -31,21 +34,36 @@ public class UserInfoUtil {
         public static UserInfoUtil userInfoUtil = new UserInfoUtil();
     }
 
-    public int getUserId() {
-        LoginResponseBean loginBean = getLoginBean();
-        if (loginBean != null) {
-            return getLoginBean().getId();
+    /**
+     * 将登录返回的数据已json格式存储起来
+     *
+     * @param loginResponseBean 登录返回的数据
+     */
+    public void saveLoginInfo(LoginResponseBean loginResponseBean) {
+        if (loginResponseBean != null) {
+            SharedPreferencesUtil.getInstance().putStringValue(ConstantsUser.user_info_json, JsonUtil.beanToJson(loginResponseBean));
+            UserInfoProvider.getInstance().saveUserToken(loginResponseBean.getNickname());
+
+        } else {
+            SharedPreferencesUtil.getInstance().putStringValue(ConstantsUser.user_info_json, "");
+            UserInfoProvider.getInstance().saveUserToken("");
         }
 
-        return -1;
     }
 
-    private LoginResponseBean getLoginBean() {
-
-        String loginJson = SharedPreferencesUtil.getInstance().getStringValue(Constants.user_info_json);
+    public LoginResponseBean getLoginBean() {
+        String loginJson = SharedPreferencesUtil.getInstance().getStringValue(ConstantsUser.user_info_json);
         if (TextUtils.isEmpty(loginJson)) {
             return null;
         }
         return new Gson().fromJson(loginJson, LoginResponseBean.class);
     }
+
+
+    public void logOut() {
+        SharedPreferencesUtil.getInstance().putStringValue(ConstantsUser.user_info_json, "");
+        UserInfoProvider.getInstance().saveUserToken("");
+    }
+
+
 }

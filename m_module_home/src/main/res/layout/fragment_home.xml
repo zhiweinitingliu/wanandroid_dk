@@ -8,6 +8,7 @@
         <variable
             name="homeViewModel"
             type="com.wdk.home.ui.HomeViewModel" />
+
     </data>
 
     <LinearLayout

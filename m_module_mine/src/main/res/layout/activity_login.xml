@@ -4,14 +4,15 @@
     <data>
 
         <variable
-            name="accountViewModel"
-            type="com.wdk.mine.viewmodels.AccountViewModel" />
+            name="loginViewModel"
+            type="com.wdk.mine.ui.login.LoginViewModel" />
 
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
         android:orientation="vertical">
 
         <TextView
@@ -98,7 +99,7 @@
             android:layout_marginRight="25dp"
             android:background="@drawable/shape_login_login_btn"
             android:onClick="doLogin"
-            android:text='@{accountViewModel.isLoading?"登录中...":"登录",default="登录"}'
+            android:text='@{loginViewModel.isLoading?"登录中...":"登录",default="登录"}'
 
             android:textColor="@color/colorFFFFFF"
             android:textSize="18dp" />

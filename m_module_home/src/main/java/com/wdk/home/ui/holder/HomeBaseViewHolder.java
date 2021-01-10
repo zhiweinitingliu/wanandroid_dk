@@ -5,7 +5,8 @@ import android.content.Context;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.wdk.home.bean.home.HomeBaseBean;
+import com.wdk.component_base.basepage.BaseViewHolder;
+import com.wdk.component_base.data.bean.BaseBean;
 import com.wdk.home.ui.HomeAdapter;
 
 /**
@@ -17,7 +18,7 @@ import com.wdk.home.ui.HomeAdapter;
  * @LastModityTime(最终修改时间): 2020/10/29 3:44 PM
  * @LastCheckBy: wdk
  */
-public abstract class HomeBaseViewHolder<T extends HomeBaseBean, VDB extends ViewDataBinding> extends RecyclerView.ViewHolder {
+public abstract class HomeBaseViewHolder<T extends BaseBean, VDB extends ViewDataBinding> extends BaseViewHolder {
 
     public Context mContext;
     VDB viewDataBinding;

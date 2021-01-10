@@ -6,7 +6,6 @@ import com.wdk.component_base.network.NetWorkManager;
 import com.wdk.component_base.network.RequestData;
 import com.wdk.mine.api.AccountService;
 import com.wdk.mine.data.bean.LoginResponseBean;
-import com.wdk.mine.data.bean.RegisterResponseBean;
 
 import io.reactivex.rxjava3.core.Observable;
 
@@ -29,9 +28,9 @@ public class LoginRepository extends BaseRepository {
         NetWorkManager.getInstance().getDataFromServer(login, requestData);
     }
 
-    public void doRegister(RequestData<RegisterResponseBean> requestData) {
+    public void doRegister(RequestData<LoginResponseBean> requestData) {
         AccountService accountService = NetWorkManager.getInstance().create(AccountService.class);
-        Observable<ResultData<RegisterResponseBean>> register = accountService.register(requestData.getStrParams("username"), requestData.getStrParams("password"), requestData.getStrParams("repassword"));
+        Observable<ResultData<LoginResponseBean>> register = accountService.register(requestData.getStrParams("username"), requestData.getStrParams("password"), requestData.getStrParams("repassword"));
         NetWorkManager.getInstance().getDataFromServer(register, requestData);
     }
 }

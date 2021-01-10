@@ -2,6 +2,8 @@ package com.wdk.component_base.utils;
 
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.JSON;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -226,5 +228,10 @@ public class JsonUtil {
         else
             return jsonObject.optBoolean(key, defaultBoole);
 
+    }
+
+
+    public static String beanToJson(Object object) {
+        return JSON.toJSONString(object);
     }
 }
